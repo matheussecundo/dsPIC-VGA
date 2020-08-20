@@ -1,5 +1,4 @@
 #define FCY 10000000
-
 // VGA Signal 640 x 480 @ 60 Hz Industry standard timing
 // #define V_REFRESH 31469 // 31.469 KHz
 // #define T1_PERIOD (FCY / V_REFRESH)					// pour 31.77 us (31.469 kHz de balayage Vertical) à 29.4912 MHz, T1Period = 937=FCY/31469 Hz
@@ -45,6 +44,7 @@ void setup_ports(void)
 
 	TRISE = 0;
 	TRISD = 0;
+	TRISB = 0;
 }
 
 // void initTimer1()

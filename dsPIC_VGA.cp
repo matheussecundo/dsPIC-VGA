@@ -1,7 +1,7 @@
 #line 1 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
-#line 17 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
+#line 16 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
 unsigned int current_vertical_line = 0;
-#line 38 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
+#line 37 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
 void setup_ports(void)
 {
  ADPCFG = 0xFFFF;
@@ -12,6 +12,7 @@ void setup_ports(void)
 
  TRISE = 0;
  TRISD = 0;
+ TRISB = 0;
 }
 #line 68 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
 void Hsync() {

@@ -43,9 +43,9 @@ Count=0
 [Useses]
 Count=0
 [EXPANDED_NODES]
-0=Project2.mcpds
+0=dsPIC_VGA.mcpds
 Count=1
 [LIB_EXPANDED_NODES]
-0=mikroE Libraries
-1=System Libraries
-Count=2
+0=
+1=
+Count=3

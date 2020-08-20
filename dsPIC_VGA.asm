@@ -1,22 +1,24 @@
 
 _setup_ports:
 
-;dsPIC_VGA.c,38 :: 		void setup_ports(void)
-;dsPIC_VGA.c,40 :: 		ADPCFG = 0xFFFF;
+;dsPIC_VGA.c,37 :: 		void setup_ports(void)
+;dsPIC_VGA.c,39 :: 		ADPCFG = 0xFFFF;
 	MOV	#65535, W0
 	MOV	WREG, ADPCFG
-;dsPIC_VGA.c,41 :: 		PORTB=0;
+;dsPIC_VGA.c,40 :: 		PORTB=0;
 	CLR	PORTB
-;dsPIC_VGA.c,42 :: 		PORTC=0;
+;dsPIC_VGA.c,41 :: 		PORTC=0;
 	CLR	PORTC
-;dsPIC_VGA.c,43 :: 		PORTD=0;
+;dsPIC_VGA.c,42 :: 		PORTD=0;
 	CLR	PORTD
-;dsPIC_VGA.c,44 :: 		PORTE=0;
+;dsPIC_VGA.c,43 :: 		PORTE=0;
 	CLR	PORTE
-;dsPIC_VGA.c,46 :: 		TRISE = 0;
+;dsPIC_VGA.c,45 :: 		TRISE = 0;
 	CLR	TRISE
-;dsPIC_VGA.c,47 :: 		TRISD = 0;
+;dsPIC_VGA.c,46 :: 		TRISD = 0;
 	CLR	TRISD
+;dsPIC_VGA.c,47 :: 		TRISB = 0;
+	CLR	TRISB
 ;dsPIC_VGA.c,48 :: 		}
 L_end_setup_ports:
 	RETURN
