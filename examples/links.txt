@@ -1,0 +1,5 @@
+http://tinyvga.com/pic-vga
+https://www.instructables.com/id/16F84A-VGA-Test/
+https://www.youtube.com/watch?v=l7rce6IQDWs&t=369s
+http://tinyvga.com/vga-timing/800x600@60Hz
+http://www.baghli.com/dspic_vga.php

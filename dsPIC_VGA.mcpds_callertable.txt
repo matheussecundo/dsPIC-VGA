@@ -1,0 +1,6 @@
+main
+	setup_ports
+	Hsync
+	Hsync_with_vsync_on
+	Hsync_with_vsync_off
+	Hsync_final
