@@ -1,13 +1,13 @@
-0	1	mikroCdsPIC.exe -MSF -DBG -pP30F4011 -DL -SSA -O11111114 -fo40 -N"C:\Git\dsPIC-VGA\dsPIC_VGA.mcpds" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\Uses\" -SP"C:\Git\dsPIC-VGA\" -IP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\Uses\" -IP"C:\Git\dsPIC-VGA\" "dsPIC_VGA.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl"	 
+0	1	mikroCdsPIC.exe -MSF -DBG -pP30F4011 -DL -SSA -O11111114 -fo32 -N"C:\Git\dsPIC-VGA\dsPIC_VGA.mcpds" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\Uses\" -SP"C:\Git\dsPIC-VGA\" -IP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\Uses\" -IP"C:\Git\dsPIC-VGA\" "dsPIC_VGA.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl"	 
 diagnostics: 0	121	Loading...	 
 diagnostics: 0	122	Compilation Started	dsPIC_VGA.c
-warning: 121	1503	Result is not defined in function: 'main'	dsPIC_VGA.c
-diagnostics: 121	123	Compiled Successfully	dsPIC_VGA.c
-diagnostics: 0	127	All files Compiled in 156 ms	 
+warning: 124	1503	Result is not defined in function: 'main'	dsPIC_VGA.c
+diagnostics: 124	123	Compiled Successfully	dsPIC_VGA.c
+diagnostics: 0	127	All files Compiled in 125 ms	 
 hint: 0	1144	Used RX (bytes): 20 (62%)   Free RX (bytes): 12 (38%)	Used RX (bytes): 20 (62%)   Free RX (bytes): 12 (38%)
 hint: 0	1144	Static RAM (bytes): 0   Dynamic RAM (bytes): 2048	Static RAM (bytes): 0   Dynamic RAM (bytes): 2048
-hint: 0	1144	Used ROM (bytes): 3634 (11%)  Free ROM (bytes): 29134 (89%)	Used ROM (bytes): 3634 (11%)  Free ROM (bytes): 29134 (89%)
+hint: 0	1144	Used ROM (bytes): 3216 (10%)  Free ROM (bytes): 29552 (90%)	Used ROM (bytes): 3216 (10%)  Free ROM (bytes): 29552 (90%)
 diagnostics: 0	125	Project Linked Successfully	dsPIC_VGA.mcpds
-diagnostics: 0	128	Linked in 187 ms	 
-diagnostics: 0	129	Project 'dsPIC_VGA.mcpds' completed: 484 ms	 
-diagnostics: 0	103	Finished successfully: 20 ago 2020, 14:16:35	dsPIC_VGA.mcpds
+diagnostics: 0	128	Linked in 156 ms	 
+diagnostics: 0	129	Project 'dsPIC_VGA.mcpds' completed: 391 ms	 
+diagnostics: 0	103	Finished successfully: 20 ago 2020, 15:02:34	dsPIC_VGA.mcpds

@@ -1,4 +1,8 @@
 #define FCY 10000000
+// 8 MHz x 1 PLL  / 4 = 2 MIPS
+// 8 MHz x 4 PLL  / 4 = 8 MIPS
+// 8 MHz x 8 PLL  / 4 = 16 MIPS
+// 8 MHz x 16 PLL / 4 = 32 MIPS
 // VGA Signal 640 x 480 @ 60 Hz Industry standard timing
 // #define V_REFRESH 31469 // 31.469 KHz
 // #define T1_PERIOD (FCY / V_REFRESH)					// pour 31.77 us (31.469 kHz de balayage Vertical) à 29.4912 MHz, T1Period = 937=FCY/31469 Hz
@@ -66,56 +70,55 @@ void setup_ports(void)
 // }
 
 void Hsync() {
-	REP(1, 9, 8, NOP) // 200 cycles
+	REP(1, 5, 8, VGA_R = !VGA_R;) // 800 / 5 = 160 cycles
 
-	REP(0, 1, 0, NOP) // 10 cycles
+	REP(0, 0, 8, VGA_R = 0;) // 40 / 5 = 8 cycles
 	
-	hsync_on; REP(0, 3, 0, NOP) hsync_off;// 32 cycles
+	hsync_on; REP(0, 2, 4, NOP) hsync_off; // 128 / 5 = 25.6 cycles
 	
-	REP(0, 1, 9, NOP) } // 22 cycles
+	REP(0, 1, 5, NOP) } // 88 / 5 = 17.6 cycles
 
 
 void Hsync_final() {
-	REP(1, 9, 8, NOP)
+	REP(1, 5, 8, NOP)
 
-	REP(0, 1, 0, NOP)
+	REP(0, 0, 8, NOP)
 	
-	hsync_on; REP(0, 3, 0, NOP) hsync_off;
+	hsync_on; REP(0, 2, 4, NOP) hsync_off;
 	
-	REP(0, 1, 7, NOP) }
+	REP(0, 1, 3, NOP) }
 
 
 void Hsync_with_vsync_on() {
-	REP(1, 9, 8, NOP)
+	REP(1, 5, 8, NOP)
 
-	REP(0, 1, 0, NOP)
+	REP(0, 0, 8, NOP)
 	
-	hsync_on; REP(0, 3, 0, NOP) hsync_off;
+	hsync_on; REP(0, 2, 4, NOP) hsync_off;
 	
-	REP(0, 1, 8, NOP) vsync_on;}
+	REP(0, 1, 4, NOP) vsync_on;}
 
 void Hsync_with_vsync_off() {
-	REP(1, 9, 8, NOP)
+	REP(1, 5, 8, NOP)
 
-	REP(0, 1, 0, NOP)
+	REP(0, 0, 8, NOP)
 	
-	hsync_on; REP(0, 3, 0, NOP) hsync_off;
+	hsync_on; REP(0, 2, 4, NOP) hsync_off;
 	
-	REP(0, 1, 8, NOP) vsync_off; }
+	REP(0, 1, 4, NOP) vsync_off; }
 
 int main()
 {
 	setup_ports();
 	hsync_off;
 	vsync_off;
-	VGA_R = 1;
 	// initTimer1();
 	while(1) {
 		REP(6, 0, 0, Hsync();) // 15.84 ms
 
 		Hsync_with_vsync_on(); // 0.0264 ms
 
-		Hsync(); Hsync(); Hsync(); Hsync_with_vsync_off(); // 0.1056 ms
+		Hsync_with_vsync_on(); Hsync_with_vsync_on(); Hsync_with_vsync_on(); Hsync_with_vsync_off(); // 0.1056 ms
 		
 		REP(0, 2, 2, Hsync();) Hsync_final(); } //0.6072 ms
 }
