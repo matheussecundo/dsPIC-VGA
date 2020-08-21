@@ -38,9 +38,7 @@ char matrix[32 * 32] =
  7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
  7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
 };
-
-char count = 0;
-#line 92 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
+#line 90 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
 void config()
 {
  ADPCFG = 0xFFFF;
@@ -68,31 +66,39 @@ void Draw() {
 
 
 
-
-     LATD = 0; LATD = 0; LATD = 0; LATD = 0; LATD = 0; LATD = 0; LATD = 0; LATD = 0; LATD = 0; LATD = 0;  LATD = 0;  LATD = 0;  LATD = 0;  LATD = 0;  LATD = 0;  LATD = 0;  LATD = 0;  LATD = 0;  LATD = 0;  LATD = 0;   
-
   LATD  = 1;
-  LATD  = 1;
-  LATD  = 1;
-  LATD  = 1;
-  LATD  = 1;
-  LATD  = 1;
-  LATD  = 1;
-  LATD  = 1;
-  LATD  = 1;
-  LATD  = 1;
-
   LATD  = 2;
+  LATD  = 1;
   LATD  = 2;
+  LATD  = 1;
   LATD  = 2;
+  LATD  = 1;
   LATD  = 2;
-  LATD  = 2;
-  LATD  = 2;
-  LATD  = 2;
-  LATD  = 2;
-  LATD  = 2;
+  LATD  = 1;
   LATD  = 2;
 
+  LATD  = 1;
+  LATD  = 1;
+  LATD  = 1;
+  LATD  = 1;
+  LATD  = 1;
+  LATD  = 1;
+  LATD  = 1;
+  LATD  = 1;
+  LATD  = 1;
+  LATD  = 1;
+
+  LATD  = 2;
+  LATD  = 2;
+  LATD  = 2;
+  LATD  = 2;
+  LATD  = 2;
+  LATD  = 2;
+  LATD  = 2;
+  LATD  = 2;
+  LATD  = 2;
+  LATD  = 2;
+
   LATD  = 3;
   LATD  = 3;
   LATD  = 3;
@@ -147,7 +153,7 @@ void Draw() {
   LATD  = 7;
   LATD  = 7;
   LATD  = 7;
-#line 233 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
+#line 240 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
   LATD  = 0;       asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
 }
 

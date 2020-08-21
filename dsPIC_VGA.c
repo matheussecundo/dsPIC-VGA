@@ -75,8 +75,6 @@ char matrix[32 * 32] =
 	7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
 };
 
-char count = 0;
-
 // void initTimer1()
 // {
 // 	T1CON = 0;
@@ -115,9 +113,17 @@ void Draw() {
 	REP(0, 1, 5, NOP)
 
 	// 800 / 5 = 160 cycles
-	// REP(0, 8, 0, VGA_COLOR = 7;)
 
-	REP(0, 2, 0, VGA_COLOR = 0;)
+	VGA_COLOR = 1;
+	VGA_COLOR = 2;
+	VGA_COLOR = 1;
+	VGA_COLOR = 2;
+	VGA_COLOR = 1;
+	VGA_COLOR = 2;
+	VGA_COLOR = 1;
+	VGA_COLOR = 2;
+	VGA_COLOR = 1;
+	VGA_COLOR = 2;
 
 	VGA_COLOR = 1;
 	VGA_COLOR = 1;
@@ -196,38 +202,39 @@ void Draw() {
 	VGA_COLOR = 7;
 	VGA_COLOR = 7;
 
-	// VGA_COLOR = matrix[count]; // 8 cycles
-	// VGA_COLOR = matrix[count]; // 4 cycles
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
-	// VGA_COLOR = matrix[count];
+	// REP(0, 4, 0, NOP VGA_COLOR = matrix[1];)
+	// NOP VGA_COLOR = line[0]; // 4 cycles
+	// VGA_COLOR = line[1];
+	// VGA_COLOR = line[2];
+	// VGA_COLOR = line[3];
+	// VGA_COLOR = line[4];
+	// VGA_COLOR = line[5];
+	// VGA_COLOR = line[6];
+	// VGA_COLOR = line[7];
+	// VGA_COLOR = line[8];
+	// VGA_COLOR = line[9];
+	// VGA_COLOR = line[10];
+	// VGA_COLOR = line[11];
+	// VGA_COLOR = line[12];
+	// VGA_COLOR = line[13];
+	// VGA_COLOR = line[14];
+	// VGA_COLOR = line[15];
+	// VGA_COLOR = line[16];
+	// VGA_COLOR = line[17];
+	// VGA_COLOR = line[18];
+	// VGA_COLOR = line[19];
+	// VGA_COLOR = line[20];
+	// VGA_COLOR = line[21];
+	// VGA_COLOR = line[22];
+	// VGA_COLOR = line[23];
+	// VGA_COLOR = line[24];
+	// VGA_COLOR = line[25];
+	// VGA_COLOR = line[26];
+	// VGA_COLOR = line[27];
+	// VGA_COLOR = line[28];
+	// VGA_COLOR = line[29];
+	// VGA_COLOR = line[30];
+	// VGA_COLOR = line[31];
 
 	// 40 / 5 = 8 cycles
 	VGA_COLOR = 0; REP(0, 0, 5, NOP)
