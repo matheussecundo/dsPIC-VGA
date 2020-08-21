@@ -1171,6 +1171,8 @@ cnpu2bits
 cnterr
 cnterr
 cnterr_bit
+color
+config
 corcon
 corconbits
 cosc
@@ -1180,6 +1182,7 @@ cosc_1
 cosc_1_bit
 cosc0
 cosc1
+count
 covte
 covte
 covte_bit
@@ -1568,6 +1571,7 @@ dostartl_8
 dostartl_8_bit
 dostartl_9
 dostartl_9_bit
+draw
 dta
 dta_0
 dta_0_bit
@@ -2243,10 +2247,7 @@ gcstat
 gcstat_bit
 get_fosc_khz
 get_fosc_per_cyc
-hsync
-hsync_final
-hsync_with_vsync_off
-hsync_with_vsync_on
+hsync_nops
 i2cadd
 i2cadd
 i2cadd_0
@@ -3060,6 +3061,7 @@ main
 matherr
 matherr
 matherr_bit
+matrix
 maxcnt
 maxcnt_0
 maxcnt_0_bit
@@ -3136,6 +3138,8 @@ nosc1
 nstdis
 nstdis
 nstdis_bit
+nulldraw
+nulldraw_less_2_final_cycle
 nvmadr
 nvmadr
 nvmadr_0
@@ -4762,7 +4766,6 @@ seg2phts_bit
 sen
 sen
 sen_bit
-setup_ports
 sevops
 sevops_0
 sevops_0_bit
