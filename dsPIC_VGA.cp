@@ -1,8 +1,7 @@
 #line 1 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
-#line 24 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
-unsigned int current_vertical_line = 0;
-unsigned int color = 0;
-#line 42 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
+#line 22 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
+int current_vertical_line = 0;
+#line 39 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
 char matrix[32 * 32] =
 {
  7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
@@ -38,7 +37,9 @@ char matrix[32 * 32] =
  7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
  7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
 };
-#line 90 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
+
+char line = 0;
+#line 89 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
 void config()
 {
  ADPCFG = 0xFFFF;
@@ -62,7 +63,9 @@ void config()
 
 void Draw() {
 
-     asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+
+ if (current_vertical_line ==  600 ) { current_vertical_line = 0; } else {  asm {nop;}   asm {nop;}  }
+       asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
 
 
 
@@ -153,8 +156,10 @@ void Draw() {
   LATD  = 7;
   LATD  = 7;
   LATD  = 7;
-#line 240 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
-  LATD  = 0;       asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+#line 241 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
+  LATD  = 0;
+ current_vertical_line++;
+       asm {nop;} 
 }
 
 void NullDraw() {

@@ -3,10 +3,8 @@
 // 8 MHz x 4 PLL  / 4 = 8 MIPS
 // 8 MHz x 8 PLL  / 4 = 16 MIPS
 // 8 MHz x 16 PLL / 4 = 32 MIPS
-// VGA Signal 640 x 480 @ 60 Hz Industry standard timing
-// #define V_REFRESH 31469 // 31.469 KHz
-// #define T1_PERIOD (FCY / V_REFRESH)					// pour 31.77 us (31.469 kHz de balayage Vertical) à 29.4912 MHz, T1Period = 937=FCY/31469 Hz
-// #define VGA_VERTICAL_LINES 525 //standart VGA quantity lines
+
+#define VGA_VERTICAL_LINES 600
 
 #define VGA_COLOR LATD
 #define VGA_R LATDbits.LATD0
@@ -21,8 +19,7 @@
 #define vsync_off VGA_VSync = 1
 #define vsync_on VGA_VSync = 0
 
-unsigned int current_vertical_line = 0;// current line for render
-unsigned int color = 0;
+int current_vertical_line = 0; // current line for render
 
 #define NOP asm {nop;}
 
@@ -75,6 +72,8 @@ char matrix[32 * 32] =
 	7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
 };
 
+char line = 0;
+
 // void initTimer1()
 // {
 // 	T1CON = 0;
@@ -110,7 +109,9 @@ void config()
 
 void Draw() {
 	// 88 / 5 = 17.6 cycles
-	REP(0, 1, 5, NOP)
+	
+	if (current_vertical_line == VGA_VERTICAL_LINES) { current_vertical_line = 0; } else { NOP NOP } // 7 cycles
+	REP(0, 0, 8, NOP)
 
 	// 800 / 5 = 160 cycles
 
@@ -237,7 +238,9 @@ void Draw() {
 	// VGA_COLOR = line[31];
 
 	// 40 / 5 = 8 cycles
-	VGA_COLOR = 0; REP(0, 0, 5, NOP)
+	VGA_COLOR = 0;
+	current_vertical_line++; // 4 cycles
+	REP(0, 0, 1, NOP)
 }
 
 void NullDraw() {

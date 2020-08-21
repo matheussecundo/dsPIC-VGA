@@ -1171,7 +1171,6 @@ cnpu2bits
 cnterr
 cnterr
 cnterr_bit
-color
 config
 corcon
 corconbits
@@ -3044,6 +3043,7 @@ latf6
 latf6
 latf6_bit
 latfbits
+line
 lock
 lock_
 lock_bit
