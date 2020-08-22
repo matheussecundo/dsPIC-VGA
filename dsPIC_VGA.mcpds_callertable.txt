@@ -34,5 +34,5 @@ main
 	Draw_27
 	Draw_28
 	Draw_29
-	NullDraw_less_2_final_cycle
+	SNAKE_NullDraw_less_2_final_cycle
 		snakeInit

@@ -3197,7 +3197,6 @@ nstdis
 nstdis
 nstdis_bit
 nulldraw
-nulldraw_less_2_final_cycle
 nvmadr
 nvmadr
 nvmadr_0
@@ -5281,6 +5280,7 @@ smpi1
 smpi2
 smpi3
 snake
+snake_nulldraw_less_2_final_cycle
 snakeinit
 spi1
 spi1buf

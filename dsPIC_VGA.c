@@ -30,23 +30,6 @@ unsigned int current_vertical_line = 0; // current line for render
 
 #include "matrix.h"
 
-#include "snake.h"
-
-void snakeInit() {
-	copy(matrix_default, matrix, MATRIX_LINES * MATRIX_COLUMNS);
-
-	snake.ipos = &matrix[14 * MATRIX_COLUMNS + 19];
-	snake.fpos = &matrix[15 * MATRIX_COLUMNS + 19];
-	*snake.ipos = 0b10010001;
-	*snake.fpos = 0b10010001;
-	snake.idir = 0b1001;
-	snake.idirx = 0;
-	snake.idiry = -1;
-	snake.fdir = 0b1001;
-	snake.fdirx = 0;
-	snake.fdiry = -1;
-}
-
 void config()
 {
 	ADPCFG = 0xFFFF;
@@ -153,6 +136,30 @@ void NullDraw() {
 	VGA_COLOR = 0; REP(0, 0, 5, NOP);
 }
 
+void HSync_nops() {
+	REP(0, 1, 9, NOP)
+}
+
+#define HSYNC_NOPS hsync_on; HSync_nops(); hsync_off;
+
+
+#include "snake.h"
+
+void snakeInit() {
+	copy(matrix_default, matrix, MATRIX_LINES * MATRIX_COLUMNS);
+
+	snake.ipos = &matrix[14 * MATRIX_COLUMNS + 19];
+	snake.fpos = &matrix[15 * MATRIX_COLUMNS + 19];
+	*snake.ipos = 0b10010001;
+	*snake.fpos = 0b10010001;
+	snake.idir = 0b1001;
+	snake.idirx = 0;
+	snake.idiry = -1;
+	snake.fdir = 0b1001;
+	snake.fdirx = 0;
+	snake.fdiry = -1;
+}
+
 void SNAKE_NullDraw_less_2_final_cycle() {
 	// 88 / 5 = 17.6 cycles
 	REP(0, 1, 5, NOP)
@@ -255,14 +262,6 @@ void SNAKE_NullDraw_less_2_final_cycle() {
 	// 40 / 5 = 8 cycles
 	VGA_COLOR = 0; REP(0, 0, 3, NOP)
 }
-
-void HSync_nops() {
-	REP(0, 1, 9, NOP)
-}
-
-
-
-#define HSYNC_NOPS hsync_on; HSync_nops(); hsync_off;
 
 int main()
 {
