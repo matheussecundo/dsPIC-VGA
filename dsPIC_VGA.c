@@ -28,6 +28,18 @@ unsigned int current_vertical_line = 0; // current line for render
 
 #include "matrix.h"
 
+#include "worm.h"
+
+void wormInit() {
+	worm.ipos = &matrix[15 * MATRIX_COLUMNS + 19];
+	worm.idirx = 0;
+	worm.idiry = -1;
+
+	worm.fpos = &matrix[14 * MATRIX_COLUMNS + 19];
+
+	worm.color = 1;
+}
+
 void config()
 {
 	ADPCFG = 0xFFFF;
@@ -138,22 +150,84 @@ void NullDraw_less_2_final_cycle() {
 	// 88 / 5 = 17.6 cycles
 	REP(0, 1, 5, NOP)
 
-	// 800 / 5 = 160 cycles
-	REP(1, 6, 0, NOP)
+	// 800 / 5 = 160 cycles /////////////////////////
+	if (current_vertical_line >= 36000) {
+
+		current_vertical_line = 0;
+
+		*worm.ipos = 0;
+
+		worm.ipos = worm.ipos + worm.idiry * MATRIX_COLUMNS + worm.idirx;
+
+		if (*worm.ipos == 1) {
+
+			wormInit();
+
+		} else {
+
+			NOP NOP NOP NOP NOP
+
+		}
+
+		if (*worm.ipos == 7) {
+
+			wormInit();
+
+		} else {
+
+			NOP NOP NOP NOP NOP
+
+		}
+
+		// if (*worm.ipos == 5) {
+		
+		// 	NOP NOP
+
+		// } else {
+
+		// 	*worm.fpos = 0;
+
+		// }
+		
+		*worm.ipos = worm.color;
+
+	} else {
+
+		NOP NOP
+
+		NOP NOP NOP
+
+		NOP NOP NOP NOP NOP NOP NOP NOP NOP NOP
+
+		NOP NOP NOP NOP
+		
+		NOP NOP NOP NOP NOP
+
+		// NOP NOP NOP NOP NOP
+
+		NOP NOP
+
+	}
+	
+	REP(1, 2, 9, NOP)
+	/////////////////////////////////////////////////
 
 	// 40 / 5 = 8 cycles
-	VGA_COLOR = 0; current_vertical_line = 0; REP(0, 0, 1, NOP)
+	VGA_COLOR = 0; REP(0, 0, 3, NOP)
 }
 
 void HSync_nops() {
 	REP(0, 1, 9, NOP)
 }
 
+
+
 #define HSYNC_NOPS hsync_on; HSync_nops(); hsync_off;
 
 int main()
 {
 	config();
+	wormInit();
 
 	while(1) {
 		//4 = 0.1056 ms

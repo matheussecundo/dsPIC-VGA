@@ -1171,6 +1171,7 @@ cnpu2bits
 cnterr
 cnterr
 cnterr_bit
+color
 config
 corcon
 corconbits
@@ -2263,6 +2264,7 @@ form_1
 form_1_bit
 form0
 form1
+fpos
 frmen
 frmen
 frmen_bit
@@ -2727,6 +2729,8 @@ icxcon
 icxcon
 icxcon
 icxcon
+idirx
+idiry
 idle
 idle
 idle_bit
@@ -2874,6 +2878,7 @@ ipl3_bit
 ipmien
 ipmien
 ipmien_bit
+ipos
 irqtocpu
 irqtocpu
 irqtocpu_bit
@@ -7455,6 +7460,8 @@ wakif_bit
 wdto
 wdto
 wdto_bit
+worm
+worminit
 wr
 wr
 wr_bit

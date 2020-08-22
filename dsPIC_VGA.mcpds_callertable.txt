@@ -1,5 +1,6 @@
 main
 	config
+	wormInit
 	HSync_nops
 	NullDraw
 	Draw_0
@@ -33,3 +34,4 @@ main
 	Draw_28
 	Draw_29
 	NullDraw_less_2_final_cycle
+		wormInit
