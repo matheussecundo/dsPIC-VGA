@@ -46,6 +46,7 @@ abaud
 abaud_bit
 abaud_u1mode_bit
 abaud_u2mode_bit
+abs
 accah
 accah_0
 accah_0_bit
@@ -705,6 +706,9 @@ alts_bit
 asam
 asam
 asam_bit
+atof
+atoi
+atol
 b
 b0
 b1
@@ -1171,7 +1175,6 @@ cnpu2bits
 cnterr
 cnterr
 cnterr_bit
-color
 config
 corcon
 corconbits
@@ -1408,6 +1411,7 @@ dissdo_bit
 disslw
 disslw
 disslw_bit
+div
 dl
 dl_0
 dl_0_bit
@@ -2215,6 +2219,9 @@ faov3h_bit
 faov3l
 faov3l
 faov3l_bit
+fdir
+fdirx
+fdiry
 ferr
 ferr
 ferr
@@ -2729,6 +2736,7 @@ icxcon
 icxcon
 icxcon
 icxcon
+idir
 idirx
 idiry
 idle
@@ -2888,6 +2896,16 @@ irxie_bit
 irxif
 irxif
 irxif_bit
+isalnum
+isalpha
+iscntrl
+isdigit
+isgraph
+islower
+ispunct
+isspace
+isupper
+isxdigit
 iue
 iue
 iue_bit
@@ -2977,6 +2995,7 @@ key_6
 key_6_bit
 key_7
 key_7_bit
+labs
 latb
 latb0
 latb0
@@ -3077,6 +3096,7 @@ latf6
 latf6
 latf6_bit
 latfbits
+ldiv
 lock
 lock_
 lock_bit
@@ -3094,6 +3114,7 @@ matherr
 matherr
 matherr_bit
 matrix
+max
 maxcnt
 maxcnt_0
 maxcnt_0_bit
@@ -3149,6 +3170,7 @@ mide
 mide_bit
 mide_c1rxm0sid_bit
 mide_c1rxm1sid_bit
+min
 modcon
 modconbits
 mode16
@@ -4475,6 +4497,7 @@ r_w_bit
 ra
 ra
 ra_bit
+rand
 rb0
 rb0
 rb0_bit
@@ -5251,6 +5274,8 @@ smpi0
 smpi1
 smpi2
 smpi3
+snake
+snakeinit
 spi1
 spi1buf
 spi1buf_0
@@ -5374,6 +5399,7 @@ spre2
 spre2
 spre2_bit
 sr
+srand
 srbits
 srr
 srr
@@ -5866,6 +5892,7 @@ tmr5hld_8
 tmr5hld_8_bit
 tmr5hld_9
 tmr5hld_9_bit
+tolower
 ton
 ton
 ton
@@ -5878,6 +5905,7 @@ ton_t2con_bit
 ton_t3con_bit
 ton_t4con_bit
 ton_t5con_bit
+toupper
 tqckps
 tqckps0
 tqckps0
@@ -7282,6 +7310,7 @@ uarten_u2mode_bit
 udis
 udis
 udis_bit
+uldiv
 unused
 updn
 updn
@@ -7460,8 +7489,6 @@ wakif_bit
 wdto
 wdto
 wdto_bit
-worm
-worminit
 wr
 wr
 wr_bit
@@ -8117,6 +8144,7 @@ xs_8
 xs_8_bit
 xs_9
 xs_9_bit
+xtoi
 xwm
 xwm_0
 xwm_0_bit

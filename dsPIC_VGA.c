@@ -21,23 +21,20 @@
 
 unsigned int current_vertical_line = 0; // current line for render
 
-#include "defines_utils.h"
+#include "macros.h"
 
 #define MATRIX_LINES 30
 #define MATRIX_COLUMNS 40
 
 #include "matrix.h"
 
-#include "worm.h"
+#include "snake.h"
 
-void wormInit() {
-	worm.ipos = &matrix[15 * MATRIX_COLUMNS + 19];
-	worm.idirx = 0;
-	worm.idiry = -1;
-
-	worm.fpos = &matrix[14 * MATRIX_COLUMNS + 19];
-
-	worm.color = 1;
+void snakeInit() {
+	snake.ipos = &matrix[15 * MATRIX_COLUMNS + 19];
+	snake.fpos = &matrix[15 * MATRIX_COLUMNS + 19];
+	*snake.ipos = 0b10010001;
+	*snake.fpos = 0b10010001;
 }
 
 void config()
@@ -50,7 +47,7 @@ void config()
 
 	TRISE = 0;
 	TRISD = 0;
-	TRISB = 0;
+	TRISB = 0xf;
 }
 
 #define DEFINE_DRAW(LINE)\
@@ -153,63 +150,75 @@ void NullDraw_less_2_final_cycle() {
 	// 800 / 5 = 160 cycles /////////////////////////
 	if (current_vertical_line >= 36000) {
 
+		// 36 cycles ///////////////////////
+		snake.idir = (*snake.ipos) >> 4;
+		snake.idirx = (snake.idir >> 2) - 2;
+		snake.idiry = (snake.idir & 0x3) - 2;
+		snake.fdir = (*snake.fpos) >> 4;
+		snake.fdirx = (snake.fdir >> 2) - 2;
+		snake.fdiry = (snake.fdir & 0x3) - 2;
+		////////////////////////////////////
+
+		// 2 cycles ////////////////////////
 		current_vertical_line = 0;
+		////////////////////////////////////
 
-		*worm.ipos = 0;
+		// 10 cycles ///////////////////////
+		snake.ipos = snake.ipos + snake.idiry * MATRIX_COLUMNS + snake.idirx;
+		////////////////////////////////////
 
-		worm.ipos = worm.ipos + worm.idiry * MATRIX_COLUMNS + worm.idirx;
+		// 20 cycles ///////////////////////
+		if ((*snake.ipos & 0x7) == 1) {
 
-		if (*worm.ipos == 1) {
-
-			wormInit();
-
-		} else {
-
-			NOP NOP NOP NOP NOP
-
-		}
-
-		if (*worm.ipos == 7) {
-
-			wormInit();
+			snakeInit();
 
 		} else {
 
-			NOP NOP NOP NOP NOP
+			REP(0,1,5, NOP)
 
 		}
+		////////////////////////////////////
 
-		// if (*worm.ipos == 5) {
+		// 20 cycles ///////////////////////
+		if (*snake.ipos == 7) {
+
+			snakeInit();
+
+		} else {
+
+			REP(0,1,5, NOP)
+
+		}
+		////////////////////////////////////
+
+		// 24 cycles ///////////////////////
+		if (*snake.ipos == 0) {
+
+			*snake.fpos = 0;
+
+			snake.fpos = snake.fpos + snake.fdiry * MATRIX_COLUMNS + snake.fdirx;
+
+			*snake.fpos = (snake.fdir << 4) | 1;
+
+		} else {
+
+			REP(0,0,3, NOP)
+
+			REP(0,1,0, NOP)
+
+			REP(0,0,6, NOP)
+
+		}
+		////////////////////////////////////
 		
-		// 	NOP NOP
+		// 6 cycles ////////////////////////
+		*snake.ipos = (snake.idir << 4) | 1;
+		////////////////////////////////////
 
-		// } else {
-
-		// 	*worm.fpos = 0;
-
-		// }
-		
-		*worm.ipos = worm.color;
-
+		REP(0, 3, 7, NOP)
 	} else {
-
-		NOP NOP
-
-		NOP NOP NOP
-
-		NOP NOP NOP NOP NOP NOP NOP NOP NOP NOP
-
-		NOP NOP NOP NOP
-		
-		NOP NOP NOP NOP NOP
-
-		// NOP NOP NOP NOP NOP
-
-		NOP NOP
-
+		REP(1, 5, 5, NOP)
 	}
-	
-	REP(1, 2, 9, NOP)
 	/////////////////////////////////////////////////
 
 	// 40 / 5 = 8 cycles
@@ -227,7 +236,7 @@ void HSync_nops() {
 int main()
 {
 	config();
-	wormInit();
+	snakeInit();
 
 	while(1) {
 		//4 = 0.1056 ms
