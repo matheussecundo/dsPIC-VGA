@@ -1,6 +1,7 @@
 main
 	config
 	snakeInit
+		copy
 	HSync_nops
 	NullDraw
 	Draw_0

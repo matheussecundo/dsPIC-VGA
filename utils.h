@@ -4,21 +4,21 @@
 //*********************************************************
 
 // #define SW0 buttonRL(&PORTB, 0)
-char buttonRL(unsigned short *port, unsigned char bit_num)
-{
-    unsigned int oldstate = 0;
-    while (1)
-    {
-        if (Button(port, bit_num, 1, 1)){
-            oldstate = 1;
-        } else if (oldstate && Button(port, bit_num, 1, 0)) {
-            oldstate = 0;
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-}
+// char buttonRL(unsigned short *port, unsigned char bit_num)
+// {
+//     unsigned int oldstate = 0;
+//     while (1)
+//     {
+//         if (Button(port, bit_num, 1, 1)){
+//             oldstate = 1;
+//         } else if (oldstate && Button(port, bit_num, 1, 0)) {
+//             oldstate = 0;
+//             return 1;
+//         } else {
+//             return 0;
+//         }
+//     }
+// }
 
 void rotateL(unsigned char *start, unsigned char *end)
 {

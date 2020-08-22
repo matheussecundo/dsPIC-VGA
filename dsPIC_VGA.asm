@@ -1,54 +1,281 @@
 
+_rotateL:
+
+;utils.h,23 :: 		void rotateL(unsigned char *start, unsigned char *end)
+;utils.h,26 :: 		aux = *start;
+; aux start address is: 2 (W1)
+	MOV.B	[W10], W1
+; aux end address is: 2 (W1)
+;utils.h,27 :: 		while (start < end)
+L_rotateL0:
+; aux start address is: 2 (W1)
+	CP	W10, W11
+	BRA LTU	L__rotateL55
+	GOTO	L_rotateL1
+L__rotateL55:
+;utils.h,29 :: 		*start = *(start + 1);
+	ADD	W10, #1, W0
+	MOV.B	[W0], [W10]
+;utils.h,30 :: 		start++;
+	ADD	W10, #1, W0
+	MOV	W0, W10
+;utils.h,31 :: 		}
+	GOTO	L_rotateL0
+L_rotateL1:
+;utils.h,32 :: 		*end = aux;
+	MOV.B	W1, [W11]
+; aux end address is: 2 (W1)
+;utils.h,33 :: 		}
+L_end_rotateL:
+	RETURN
+; end of _rotateL
+
+_rotateR:
+
+;utils.h,35 :: 		void rotateR(unsigned char *start, unsigned char *end)
+;utils.h,38 :: 		aux = *end;
+; aux start address is: 2 (W1)
+	MOV.B	[W11], W1
+; aux end address is: 2 (W1)
+;utils.h,39 :: 		while (start < end)
+L_rotateR2:
+; aux start address is: 2 (W1)
+	CP	W10, W11
+	BRA LTU	L__rotateR57
+	GOTO	L_rotateR3
+L__rotateR57:
+;utils.h,41 :: 		*end = *(end - 1);
+	SUB	W11, #1, W0
+	MOV.B	[W0], [W11]
+;utils.h,42 :: 		end--;
+	SUB	W11, #1, W0
+	MOV	W0, W11
+;utils.h,43 :: 		}
+	GOTO	L_rotateR2
+L_rotateR3:
+;utils.h,44 :: 		*start = aux;
+	MOV.B	W1, [W10]
+; aux end address is: 2 (W1)
+;utils.h,45 :: 		}
+L_end_rotateR:
+	RETURN
+; end of _rotateR
+
+_fill:
+
+;utils.h,47 :: 		void fill(unsigned char *data0, unsigned int size, unsigned char value)
+;utils.h,50 :: 		for (i = 0; i < size; i++) data0[i] = value;
+; i start address is: 2 (W1)
+	CLR	W1
+; i end address is: 2 (W1)
+L_fill4:
+; i start address is: 2 (W1)
+	CP	W1, W11
+	BRA LTU	L__fill59
+	GOTO	L_fill5
+L__fill59:
+	ADD	W10, W1, W0
+	MOV.B	W12, [W0]
+	INC	W1
+; i end address is: 2 (W1)
+	GOTO	L_fill4
+L_fill5:
+;utils.h,51 :: 		}
+L_end_fill:
+	RETURN
+; end of _fill
+
+_copy:
+
+;utils.h,53 :: 		void copy(unsigned char *data0, unsigned char *destination, unsigned int size)
+;utils.h,56 :: 		for (i = 0; i < size; i++) destination[i] = data0[i];
+; i start address is: 4 (W2)
+	CLR	W2
+; i end address is: 4 (W2)
+L_copy7:
+; i start address is: 4 (W2)
+	CP	W2, W12
+	BRA LTU	L__copy61
+	GOTO	L_copy8
+L__copy61:
+	ADD	W11, W2, W1
+	ADD	W10, W2, W0
+	MOV.B	[W0], [W1]
+	INC	W2
+; i end address is: 4 (W2)
+	GOTO	L_copy7
+L_copy8:
+;utils.h,57 :: 		}
+L_end_copy:
+	RETURN
+; end of _copy
+
+_compare:
+
+;utils.h,59 :: 		char compare(unsigned char *data0, unsigned char *data1, unsigned int size)
+;utils.h,62 :: 		for (i = 0; i < size; i++)
+; i start address is: 4 (W2)
+	CLR	W2
+; i end address is: 4 (W2)
+L_compare10:
+; i start address is: 4 (W2)
+	CP	W2, W12
+	BRA LTU	L__compare63
+	GOTO	L_compare11
+L__compare63:
+;utils.h,64 :: 		if (data0[i] != data1[i]) {
+	ADD	W10, W2, W0
+	ADD	W11, W2, W1
+	MOV.B	[W0], W0
+	CP.B	W0, [W1]
+	BRA NZ	L__compare64
+	GOTO	L_compare13
+L__compare64:
+;utils.h,65 :: 		if (data0[i] < data1[i]) {
+	ADD	W10, W2, W0
+	ADD	W11, W2, W1
+; i end address is: 4 (W2)
+	MOV.B	[W0], W0
+	CP.B	W0, [W1]
+	BRA LTU	L__compare65
+	GOTO	L_compare14
+L__compare65:
+;utils.h,66 :: 		return -1;
+	MOV.B	#255, W0
+	GOTO	L_end_compare
+;utils.h,67 :: 		} else {
+L_compare14:
+;utils.h,68 :: 		return 1;
+	MOV.B	#1, W0
+	GOTO	L_end_compare
+;utils.h,70 :: 		}
+L_compare13:
+;utils.h,62 :: 		for (i = 0; i < size; i++)
+; i start address is: 4 (W2)
+	INC	W2
+;utils.h,71 :: 		}
+; i end address is: 4 (W2)
+	GOTO	L_compare10
+L_compare11:
+;utils.h,72 :: 		return 0;
+	CLR	W0
+;utils.h,73 :: 		}
+L_end_compare:
+	RETURN
+; end of _compare
+
+_toupper_str:
+
+;utils.h,75 :: 		void toupper_str(unsigned char *str)
+;utils.h,77 :: 		while (*str)
+L_toupper_str16:
+	CP0.B	[W10]
+	BRA NZ	L__toupper_str67
+	GOTO	L_toupper_str17
+L__toupper_str67:
+;utils.h,79 :: 		*str = toupper(*str);
+	PUSH	W10
+	MOV.B	[W10], W10
+	CALL	_toupper
+	POP	W10
+	MOV.B	W0, [W10]
+;utils.h,80 :: 		str++;
+	ADD	W10, #1, W0
+	MOV	W0, W10
+;utils.h,81 :: 		}
+	GOTO	L_toupper_str16
+L_toupper_str17:
+;utils.h,82 :: 		}
+L_end_toupper_str:
+	RETURN
+; end of _toupper_str
+
 _snakeInit:
 
-;dsPIC_VGA.c,33 :: 		void snakeInit() {
-;dsPIC_VGA.c,34 :: 		snake.ipos = &matrix[15 * MATRIX_COLUMNS + 19];
-	MOV	#lo_addr(_matrix+619), W0
+;dsPIC_VGA.c,35 :: 		void snakeInit() {
+;dsPIC_VGA.c,36 :: 		copy(matrix_default, matrix, MATRIX_LINES * MATRIX_COLUMNS);
+	PUSH	W10
+	PUSH	W11
+	PUSH	W12
+	MOV	#1200, W12
+	MOV	#lo_addr(_matrix), W11
+	MOV	#lo_addr(_matrix_default), W10
+	CALL	_copy
+;dsPIC_VGA.c,38 :: 		snake.ipos = &matrix[14 * MATRIX_COLUMNS + 19];
+	MOV	#lo_addr(_matrix+579), W0
 	MOV	W0, _snake
-;dsPIC_VGA.c,35 :: 		snake.fpos = &matrix[15 * MATRIX_COLUMNS + 19];
+;dsPIC_VGA.c,39 :: 		snake.fpos = &matrix[15 * MATRIX_COLUMNS + 19];
 	MOV	#lo_addr(_matrix+619), W0
 	MOV	W0, _snake+6
-;dsPIC_VGA.c,36 :: 		*snake.ipos = 0b10010001;
+;dsPIC_VGA.c,40 :: 		*snake.ipos = 0b10010001;
 	MOV	_snake, W1
 	MOV.B	#145, W0
 	MOV.B	W0, [W1]
-;dsPIC_VGA.c,37 :: 		*snake.fpos = 0b10010001;
+;dsPIC_VGA.c,41 :: 		*snake.fpos = 0b10010001;
 	MOV	_snake+6, W1
 	MOV.B	#145, W0
 	MOV.B	W0, [W1]
-;dsPIC_VGA.c,38 :: 		}
+;dsPIC_VGA.c,42 :: 		snake.idir = 0b1001;
+	MOV	#lo_addr(_snake+2), W1
+	MOV.B	#9, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,43 :: 		snake.idirx = 0;
+	MOV	#lo_addr(_snake+3), W1
+	CLR	W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,44 :: 		snake.idiry = -1;
+	MOV	#lo_addr(_snake+4), W1
+	MOV.B	#255, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,45 :: 		snake.fdir = 0b1001;
+	MOV	#lo_addr(_snake+8), W1
+	MOV.B	#9, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,46 :: 		snake.fdirx = 0;
+	MOV	#lo_addr(_snake+9), W1
+	CLR	W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,47 :: 		snake.fdiry = -1;
+	MOV	#lo_addr(_snake+10), W1
+	MOV.B	#255, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,48 :: 		}
 L_end_snakeInit:
+	POP	W12
+	POP	W11
+	POP	W10
 	RETURN
 ; end of _snakeInit
 
 _config:
 
-;dsPIC_VGA.c,40 :: 		void config()
-;dsPIC_VGA.c,42 :: 		ADPCFG = 0xFFFF;
+;dsPIC_VGA.c,50 :: 		void config()
+;dsPIC_VGA.c,52 :: 		ADPCFG = 0xFFFF;
 	MOV	#65535, W0
 	MOV	WREG, ADPCFG
-;dsPIC_VGA.c,43 :: 		PORTB=0;
+;dsPIC_VGA.c,53 :: 		PORTB=0;
 	CLR	PORTB
-;dsPIC_VGA.c,44 :: 		PORTC=0;
+;dsPIC_VGA.c,54 :: 		PORTC=0;
 	CLR	PORTC
-;dsPIC_VGA.c,45 :: 		PORTD=0;
+;dsPIC_VGA.c,55 :: 		PORTD=0;
 	CLR	PORTD
-;dsPIC_VGA.c,46 :: 		PORTE=0;
+;dsPIC_VGA.c,56 :: 		PORTE=0;
 	CLR	PORTE
-;dsPIC_VGA.c,48 :: 		TRISE = 0;
+;dsPIC_VGA.c,58 :: 		TRISE = 0;
 	CLR	TRISE
-;dsPIC_VGA.c,49 :: 		TRISD = 0;
+;dsPIC_VGA.c,59 :: 		TRISD = 0;
 	CLR	TRISD
-;dsPIC_VGA.c,50 :: 		TRISB = 0;
-	CLR	TRISB
-;dsPIC_VGA.c,51 :: 		}
+;dsPIC_VGA.c,60 :: 		TRISB = 0xf;
+	MOV	#15, W0
+	MOV	WREG, TRISB
+;dsPIC_VGA.c,61 :: 		}
 L_end_config:
 	RETURN
 ; end of _config
 
 _Draw_0:
 
-;dsPIC_VGA.c,104 :: 		DEFINE_DRAW(0)
+;dsPIC_VGA.c,114 :: 		DEFINE_DRAW(0)
 	NOP
 	NOP
 	NOP
@@ -235,7 +462,7 @@ L_end_Draw_0:
 
 _Draw_1:
 
-;dsPIC_VGA.c,105 :: 		DEFINE_DRAW(1)
+;dsPIC_VGA.c,115 :: 		DEFINE_DRAW(1)
 	NOP
 	NOP
 	NOP
@@ -422,7 +649,7 @@ L_end_Draw_1:
 
 _Draw_2:
 
-;dsPIC_VGA.c,106 :: 		DEFINE_DRAW(2)
+;dsPIC_VGA.c,116 :: 		DEFINE_DRAW(2)
 	NOP
 	NOP
 	NOP
@@ -609,7 +836,7 @@ L_end_Draw_2:
 
 _Draw_3:
 
-;dsPIC_VGA.c,107 :: 		DEFINE_DRAW(3)
+;dsPIC_VGA.c,117 :: 		DEFINE_DRAW(3)
 	NOP
 	NOP
 	NOP
@@ -796,7 +1023,7 @@ L_end_Draw_3:
 
 _Draw_4:
 
-;dsPIC_VGA.c,108 :: 		DEFINE_DRAW(4)
+;dsPIC_VGA.c,118 :: 		DEFINE_DRAW(4)
 	NOP
 	NOP
 	NOP
@@ -983,7 +1210,7 @@ L_end_Draw_4:
 
 _Draw_5:
 
-;dsPIC_VGA.c,109 :: 		DEFINE_DRAW(5)
+;dsPIC_VGA.c,119 :: 		DEFINE_DRAW(5)
 	NOP
 	NOP
 	NOP
@@ -1170,7 +1397,7 @@ L_end_Draw_5:
 
 _Draw_6:
 
-;dsPIC_VGA.c,110 :: 		DEFINE_DRAW(6)
+;dsPIC_VGA.c,120 :: 		DEFINE_DRAW(6)
 	NOP
 	NOP
 	NOP
@@ -1357,7 +1584,7 @@ L_end_Draw_6:
 
 _Draw_7:
 
-;dsPIC_VGA.c,111 :: 		DEFINE_DRAW(7)
+;dsPIC_VGA.c,121 :: 		DEFINE_DRAW(7)
 	NOP
 	NOP
 	NOP
@@ -1544,7 +1771,7 @@ L_end_Draw_7:
 
 _Draw_8:
 
-;dsPIC_VGA.c,112 :: 		DEFINE_DRAW(8)
+;dsPIC_VGA.c,122 :: 		DEFINE_DRAW(8)
 	NOP
 	NOP
 	NOP
@@ -1731,7 +1958,7 @@ L_end_Draw_8:
 
 _Draw_9:
 
-;dsPIC_VGA.c,113 :: 		DEFINE_DRAW(9)
+;dsPIC_VGA.c,123 :: 		DEFINE_DRAW(9)
 	NOP
 	NOP
 	NOP
@@ -1918,7 +2145,7 @@ L_end_Draw_9:
 
 _Draw_10:
 
-;dsPIC_VGA.c,114 :: 		DEFINE_DRAW(10)
+;dsPIC_VGA.c,124 :: 		DEFINE_DRAW(10)
 	NOP
 	NOP
 	NOP
@@ -2105,7 +2332,7 @@ L_end_Draw_10:
 
 _Draw_11:
 
-;dsPIC_VGA.c,115 :: 		DEFINE_DRAW(11)
+;dsPIC_VGA.c,125 :: 		DEFINE_DRAW(11)
 	NOP
 	NOP
 	NOP
@@ -2292,7 +2519,7 @@ L_end_Draw_11:
 
 _Draw_12:
 
-;dsPIC_VGA.c,116 :: 		DEFINE_DRAW(12)
+;dsPIC_VGA.c,126 :: 		DEFINE_DRAW(12)
 	NOP
 	NOP
 	NOP
@@ -2479,7 +2706,7 @@ L_end_Draw_12:
 
 _Draw_13:
 
-;dsPIC_VGA.c,117 :: 		DEFINE_DRAW(13)
+;dsPIC_VGA.c,127 :: 		DEFINE_DRAW(13)
 	NOP
 	NOP
 	NOP
@@ -2666,7 +2893,7 @@ L_end_Draw_13:
 
 _Draw_14:
 
-;dsPIC_VGA.c,118 :: 		DEFINE_DRAW(14)
+;dsPIC_VGA.c,128 :: 		DEFINE_DRAW(14)
 	NOP
 	NOP
 	NOP
@@ -2853,7 +3080,7 @@ L_end_Draw_14:
 
 _Draw_15:
 
-;dsPIC_VGA.c,119 :: 		DEFINE_DRAW(15)
+;dsPIC_VGA.c,129 :: 		DEFINE_DRAW(15)
 	NOP
 	NOP
 	NOP
@@ -3040,7 +3267,7 @@ L_end_Draw_15:
 
 _Draw_16:
 
-;dsPIC_VGA.c,120 :: 		DEFINE_DRAW(16)
+;dsPIC_VGA.c,130 :: 		DEFINE_DRAW(16)
 	NOP
 	NOP
 	NOP
@@ -3227,7 +3454,7 @@ L_end_Draw_16:
 
 _Draw_17:
 
-;dsPIC_VGA.c,121 :: 		DEFINE_DRAW(17)
+;dsPIC_VGA.c,131 :: 		DEFINE_DRAW(17)
 	NOP
 	NOP
 	NOP
@@ -3414,7 +3641,7 @@ L_end_Draw_17:
 
 _Draw_18:
 
-;dsPIC_VGA.c,122 :: 		DEFINE_DRAW(18)
+;dsPIC_VGA.c,132 :: 		DEFINE_DRAW(18)
 	NOP
 	NOP
 	NOP
@@ -3601,7 +3828,7 @@ L_end_Draw_18:
 
 _Draw_19:
 
-;dsPIC_VGA.c,123 :: 		DEFINE_DRAW(19)
+;dsPIC_VGA.c,133 :: 		DEFINE_DRAW(19)
 	NOP
 	NOP
 	NOP
@@ -3788,7 +4015,7 @@ L_end_Draw_19:
 
 _Draw_20:
 
-;dsPIC_VGA.c,124 :: 		DEFINE_DRAW(20)
+;dsPIC_VGA.c,134 :: 		DEFINE_DRAW(20)
 	NOP
 	NOP
 	NOP
@@ -3975,7 +4202,7 @@ L_end_Draw_20:
 
 _Draw_21:
 
-;dsPIC_VGA.c,125 :: 		DEFINE_DRAW(21)
+;dsPIC_VGA.c,135 :: 		DEFINE_DRAW(21)
 	NOP
 	NOP
 	NOP
@@ -4162,7 +4389,7 @@ L_end_Draw_21:
 
 _Draw_22:
 
-;dsPIC_VGA.c,126 :: 		DEFINE_DRAW(22)
+;dsPIC_VGA.c,136 :: 		DEFINE_DRAW(22)
 	NOP
 	NOP
 	NOP
@@ -4349,7 +4576,7 @@ L_end_Draw_22:
 
 _Draw_23:
 
-;dsPIC_VGA.c,127 :: 		DEFINE_DRAW(23)
+;dsPIC_VGA.c,137 :: 		DEFINE_DRAW(23)
 	NOP
 	NOP
 	NOP
@@ -4536,7 +4763,7 @@ L_end_Draw_23:
 
 _Draw_24:
 
-;dsPIC_VGA.c,128 :: 		DEFINE_DRAW(24)
+;dsPIC_VGA.c,138 :: 		DEFINE_DRAW(24)
 	NOP
 	NOP
 	NOP
@@ -4723,7 +4950,7 @@ L_end_Draw_24:
 
 _Draw_25:
 
-;dsPIC_VGA.c,129 :: 		DEFINE_DRAW(25)
+;dsPIC_VGA.c,139 :: 		DEFINE_DRAW(25)
 	NOP
 	NOP
 	NOP
@@ -4910,7 +5137,7 @@ L_end_Draw_25:
 
 _Draw_26:
 
-;dsPIC_VGA.c,130 :: 		DEFINE_DRAW(26)
+;dsPIC_VGA.c,140 :: 		DEFINE_DRAW(26)
 	NOP
 	NOP
 	NOP
@@ -5097,7 +5324,7 @@ L_end_Draw_26:
 
 _Draw_27:
 
-;dsPIC_VGA.c,131 :: 		DEFINE_DRAW(27)
+;dsPIC_VGA.c,141 :: 		DEFINE_DRAW(27)
 	NOP
 	NOP
 	NOP
@@ -5284,7 +5511,7 @@ L_end_Draw_27:
 
 _Draw_28:
 
-;dsPIC_VGA.c,132 :: 		DEFINE_DRAW(28)
+;dsPIC_VGA.c,142 :: 		DEFINE_DRAW(28)
 	NOP
 	NOP
 	NOP
@@ -5471,7 +5698,7 @@ L_end_Draw_28:
 
 _Draw_29:
 
-;dsPIC_VGA.c,133 :: 		DEFINE_DRAW(29)
+;dsPIC_VGA.c,143 :: 		DEFINE_DRAW(29)
 	NOP
 	NOP
 	NOP
@@ -5658,8 +5885,8 @@ L_end_Draw_29:
 
 _NullDraw:
 
-;dsPIC_VGA.c,135 :: 		void NullDraw() {
-;dsPIC_VGA.c,137 :: 		REP(0, 1, 5, NOP)
+;dsPIC_VGA.c,145 :: 		void NullDraw() {
+;dsPIC_VGA.c,147 :: 		REP(0, 1, 5, NOP)
 	NOP
 	NOP
 	NOP
@@ -5675,7 +5902,7 @@ _NullDraw:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,140 :: 		REP(1, 6, 0, NOP)
+;dsPIC_VGA.c,150 :: 		REP(1, 6, 0, NOP)
 	NOP
 	NOP
 	NOP
@@ -5836,22 +6063,22 @@ _NullDraw:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,143 :: 		VGA_COLOR = 0; REP(0, 0, 5, NOP);
+;dsPIC_VGA.c,153 :: 		VGA_COLOR = 0; REP(0, 0, 5, NOP);
 	CLR	LATD
 	NOP
 	NOP
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,144 :: 		}
+;dsPIC_VGA.c,154 :: 		}
 L_end_NullDraw:
 	RETURN
 ; end of _NullDraw
 
 _NullDraw_less_2_final_cycle:
 
-;dsPIC_VGA.c,146 :: 		void NullDraw_less_2_final_cycle() {
-;dsPIC_VGA.c,148 :: 		REP(0, 1, 5, NOP)
+;dsPIC_VGA.c,156 :: 		void NullDraw_less_2_final_cycle() {
+;dsPIC_VGA.c,158 :: 		REP(0, 1, 5, NOP)
 	NOP
 	NOP
 	NOP
@@ -5867,59 +6094,276 @@ _NullDraw_less_2_final_cycle:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,151 :: 		if (current_vertical_line >= 36000) {
+;dsPIC_VGA.c,161 :: 		if (current_vertical_line >= 36000) {
 	MOV	_current_vertical_line, W1
 	MOV	#36000, W0
 	CP	W1, W0
-	BRA GEU	L__NullDraw_less_2_final_cycle44
-	GOTO	L_NullDraw_less_2_final_cycle0
+	BRA GEU	L__NullDraw_less_2_final_cycle102
+	GOTO	L_NullDraw_less_2_final_cycle18
+L__NullDraw_less_2_final_cycle102:
+;dsPIC_VGA.c,164 :: 		if (PORTBbits.RB0 && snake.idirx != 1) {
+	BTSS	PORTBbits, #0
+	GOTO	L__NullDraw_less_2_final_cycle47
+	MOV	#lo_addr(_snake+3), W0
+	MOV.B	[W0], W0
+	CP.B	W0, #1
+	BRA NZ	L__NullDraw_less_2_final_cycle103
+	GOTO	L__NullDraw_less_2_final_cycle46
+L__NullDraw_less_2_final_cycle103:
+L__NullDraw_less_2_final_cycle45:
+;dsPIC_VGA.c,165 :: 		snake.idir = 0b0110;
+	MOV	#lo_addr(_snake+2), W1
+	MOV.B	#6, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,166 :: 		snake.idirx = -1;
+	MOV	#lo_addr(_snake+3), W1
+	MOV.B	#255, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,167 :: 		snake.idiry = 0;
+	MOV	#lo_addr(_snake+4), W1
+	CLR	W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,168 :: 		*snake.ipos = (*snake.ipos & 0xf) | 0b01100000;
+	MOV	_snake, W0
+	ZE	[W0], W0
+	AND	W0, #15, W1
+	MOV	#96, W0
+	IOR	W1, W0, W1
+	MOV	_snake, W0
+	MOV.B	W1, [W0]
+;dsPIC_VGA.c,169 :: 		REP(0,2,7, NOP)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+;dsPIC_VGA.c,170 :: 		} else if (PORTBbits.RB1 && snake.idiry != 1) {
+	GOTO	L_NullDraw_less_2_final_cycle22
+;dsPIC_VGA.c,164 :: 		if (PORTBbits.RB0 && snake.idirx != 1) {
+L__NullDraw_less_2_final_cycle47:
+L__NullDraw_less_2_final_cycle46:
+;dsPIC_VGA.c,170 :: 		} else if (PORTBbits.RB1 && snake.idiry != 1) {
+	BTSS	PORTBbits, #1
+	GOTO	L__NullDraw_less_2_final_cycle49
+	MOV	#lo_addr(_snake+4), W0
+	MOV.B	[W0], W0
+	CP.B	W0, #1
+	BRA NZ	L__NullDraw_less_2_final_cycle104
+	GOTO	L__NullDraw_less_2_final_cycle48
+L__NullDraw_less_2_final_cycle104:
 L__NullDraw_less_2_final_cycle44:
-;dsPIC_VGA.c,154 :: 		snake.idir = (*snake.ipos) >> 4;
+;dsPIC_VGA.c,171 :: 		snake.idir = 0b1001;
+	MOV	#lo_addr(_snake+2), W1
+	MOV.B	#9, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,172 :: 		snake.idirx = 0;
+	MOV	#lo_addr(_snake+3), W1
+	CLR	W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,173 :: 		snake.idiry = -1;
+	MOV	#lo_addr(_snake+4), W1
+	MOV.B	#255, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,174 :: 		*snake.ipos = (*snake.ipos & 0xf) | 0b10010000;
+	MOV	_snake, W0
+	ZE	[W0], W0
+	AND	W0, #15, W1
+	MOV	#144, W0
+	IOR	W1, W0, W1
+	MOV	_snake, W0
+	MOV.B	W1, [W0]
+;dsPIC_VGA.c,175 :: 		REP(0,2,0, NOP)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+;dsPIC_VGA.c,176 :: 		} else if (PORTBbits.RB2 && snake.idirx != -1) {
+	GOTO	L_NullDraw_less_2_final_cycle26
+;dsPIC_VGA.c,170 :: 		} else if (PORTBbits.RB1 && snake.idiry != 1) {
+L__NullDraw_less_2_final_cycle49:
+L__NullDraw_less_2_final_cycle48:
+;dsPIC_VGA.c,176 :: 		} else if (PORTBbits.RB2 && snake.idirx != -1) {
+	BTSS	PORTBbits, #2
+	GOTO	L__NullDraw_less_2_final_cycle51
+	MOV	#lo_addr(_snake+3), W0
+	MOV.B	[W0], W1
+	MOV.B	#255, W0
+	CP.B	W1, W0
+	BRA NZ	L__NullDraw_less_2_final_cycle105
+	GOTO	L__NullDraw_less_2_final_cycle50
+L__NullDraw_less_2_final_cycle105:
+L__NullDraw_less_2_final_cycle43:
+;dsPIC_VGA.c,177 :: 		snake.idir = 0b1110;
+	MOV	#lo_addr(_snake+2), W1
+	MOV.B	#14, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,178 :: 		snake.idirx = 1;
+	MOV	#lo_addr(_snake+3), W1
+	MOV.B	#1, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,179 :: 		snake.idiry = 0;
+	MOV	#lo_addr(_snake+4), W1
+	CLR	W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,180 :: 		*snake.ipos = (*snake.ipos & 0xf) | 0b11100000;
+	MOV	_snake, W0
+	ZE	[W0], W0
+	AND	W0, #15, W1
+	MOV	#224, W0
+	IOR	W1, W0, W1
+	MOV	_snake, W0
+	MOV.B	W1, [W0]
+;dsPIC_VGA.c,181 :: 		REP(0,1,3, NOP)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+;dsPIC_VGA.c,182 :: 		} else if (PORTBbits.RB3 && snake.idiry != -1) {
+	GOTO	L_NullDraw_less_2_final_cycle30
+;dsPIC_VGA.c,176 :: 		} else if (PORTBbits.RB2 && snake.idirx != -1) {
+L__NullDraw_less_2_final_cycle51:
+L__NullDraw_less_2_final_cycle50:
+;dsPIC_VGA.c,182 :: 		} else if (PORTBbits.RB3 && snake.idiry != -1) {
+	BTSS	PORTBbits, #3
+	GOTO	L__NullDraw_less_2_final_cycle53
+	MOV	#lo_addr(_snake+4), W0
+	MOV.B	[W0], W1
+	MOV.B	#255, W0
+	CP.B	W1, W0
+	BRA NZ	L__NullDraw_less_2_final_cycle106
+	GOTO	L__NullDraw_less_2_final_cycle52
+L__NullDraw_less_2_final_cycle106:
+L__NullDraw_less_2_final_cycle42:
+;dsPIC_VGA.c,183 :: 		snake.idir = 0b1011;
+	MOV	#lo_addr(_snake+2), W1
+	MOV.B	#11, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,184 :: 		snake.idirx = 0;
+	MOV	#lo_addr(_snake+3), W1
+	CLR	W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,185 :: 		snake.idiry = 1;
+	MOV	#lo_addr(_snake+4), W1
+	MOV.B	#1, W0
+	MOV.B	W0, [W1]
+;dsPIC_VGA.c,186 :: 		*snake.ipos = (*snake.ipos & 0xf) | 0b10110000;
+	MOV	_snake, W0
+	ZE	[W0], W0
+	AND	W0, #15, W1
+	MOV	#176, W0
+	IOR	W1, W0, W1
+	MOV	_snake, W0
+	MOV.B	W1, [W0]
+;dsPIC_VGA.c,187 :: 		REP(0,0,6, NOP)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+;dsPIC_VGA.c,188 :: 		} else {
+	GOTO	L_NullDraw_less_2_final_cycle34
+;dsPIC_VGA.c,182 :: 		} else if (PORTBbits.RB3 && snake.idiry != -1) {
+L__NullDraw_less_2_final_cycle53:
+L__NullDraw_less_2_final_cycle52:
+;dsPIC_VGA.c,189 :: 		snake.idir = (*snake.ipos) >> 4;
 	MOV	_snake, W0
 	MOV.B	[W0], W0
 	ZE	W0, W0
 	LSR	W0, #4, W1
 	MOV	#lo_addr(_snake+2), W0
 	MOV.B	W1, [W0]
-;dsPIC_VGA.c,155 :: 		snake.idirx = (snake.idir >> 2) - 2;
+;dsPIC_VGA.c,190 :: 		snake.idirx = (snake.idir >> 2) - 2;
 	SE	W1, W0
 	ASR	W0, #2, W0
 	SE	W0, W0
 	SUB	W0, #2, W1
 	MOV	#lo_addr(_snake+3), W0
 	MOV.B	W1, [W0]
-;dsPIC_VGA.c,156 :: 		snake.idiry = (snake.idir & 0x3) - 2;
+;dsPIC_VGA.c,191 :: 		snake.idiry = (snake.idir & 0x3) - 2;
 	MOV	#lo_addr(_snake+2), W0
 	SE	[W0], W0
 	AND	W0, #3, W0
 	SUB	W0, #2, W1
 	MOV	#lo_addr(_snake+4), W0
 	MOV.B	W1, [W0]
-;dsPIC_VGA.c,157 :: 		snake.fdir = (*snake.fpos) >> 4;
+;dsPIC_VGA.c,192 :: 		}
+L_NullDraw_less_2_final_cycle34:
+L_NullDraw_less_2_final_cycle30:
+L_NullDraw_less_2_final_cycle26:
+L_NullDraw_less_2_final_cycle22:
+;dsPIC_VGA.c,196 :: 		snake.fdir = (*snake.fpos) >> 4;
 	MOV	_snake+6, W0
 	MOV.B	[W0], W0
 	ZE	W0, W0
 	LSR	W0, #4, W1
 	MOV	#lo_addr(_snake+8), W0
 	MOV.B	W1, [W0]
-;dsPIC_VGA.c,158 :: 		snake.fdirx = (snake.fdir >> 2) - 2;
+;dsPIC_VGA.c,197 :: 		snake.fdirx = (snake.fdir >> 2) - 2;
 	SE	W1, W0
 	ASR	W0, #2, W0
 	SE	W0, W0
 	SUB	W0, #2, W1
 	MOV	#lo_addr(_snake+9), W0
 	MOV.B	W1, [W0]
-;dsPIC_VGA.c,159 :: 		snake.fdiry = (snake.fdir & 0x3) - 2;
+;dsPIC_VGA.c,198 :: 		snake.fdiry = (snake.fdir & 0x3) - 2;
 	MOV	#lo_addr(_snake+8), W0
 	SE	[W0], W0
 	AND	W0, #3, W0
 	SUB	W0, #2, W1
 	MOV	#lo_addr(_snake+10), W0
 	MOV.B	W1, [W0]
-;dsPIC_VGA.c,163 :: 		current_vertical_line = 0;
+;dsPIC_VGA.c,202 :: 		current_vertical_line = 0;
 	CLR	W0
 	MOV	W0, _current_vertical_line
-;dsPIC_VGA.c,167 :: 		snake.ipos = snake.ipos + snake.idiry * MATRIX_COLUMNS + snake.idirx;
+;dsPIC_VGA.c,206 :: 		snake.ipos = snake.ipos + snake.idiry * MATRIX_COLUMNS + snake.idirx;
 	MOV	#lo_addr(_snake+4), W0
 	SE	[W0], W1
 	MOV	#40, W0
@@ -5930,78 +6374,40 @@ L__NullDraw_less_2_final_cycle44:
 	SE	[W0], W0
 	ADD	W1, W0, W0
 	MOV	W0, _snake
-;dsPIC_VGA.c,171 :: 		if ((*snake.ipos & 0x7) == 1) {
+;dsPIC_VGA.c,210 :: 		if ((*snake.ipos & 0x7) == 1) {
 	ZE	[W0], W0
 	AND	W0, #7, W0
 	CP	W0, #1
-	BRA Z	L__NullDraw_less_2_final_cycle45
-	GOTO	L_NullDraw_less_2_final_cycle1
-L__NullDraw_less_2_final_cycle45:
-;dsPIC_VGA.c,173 :: 		snakeInit();
+	BRA Z	L__NullDraw_less_2_final_cycle107
+	GOTO	L_NullDraw_less_2_final_cycle35
+L__NullDraw_less_2_final_cycle107:
+;dsPIC_VGA.c,212 :: 		snakeInit();
 	CALL	_snakeInit
-;dsPIC_VGA.c,175 :: 		} else {
-	GOTO	L_NullDraw_less_2_final_cycle2
-L_NullDraw_less_2_final_cycle1:
-;dsPIC_VGA.c,177 :: 		REP(0,1,5, NOP)
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-;dsPIC_VGA.c,179 :: 		}
-L_NullDraw_less_2_final_cycle2:
-;dsPIC_VGA.c,183 :: 		if (*snake.ipos == 7) {
+;dsPIC_VGA.c,214 :: 		}
+L_NullDraw_less_2_final_cycle35:
+;dsPIC_VGA.c,218 :: 		if (*snake.ipos == 7) {
 	MOV	_snake, W0
 	MOV.B	[W0], W0
 	CP.B	W0, #7
-	BRA Z	L__NullDraw_less_2_final_cycle46
-	GOTO	L_NullDraw_less_2_final_cycle3
-L__NullDraw_less_2_final_cycle46:
-;dsPIC_VGA.c,185 :: 		snakeInit();
+	BRA Z	L__NullDraw_less_2_final_cycle108
+	GOTO	L_NullDraw_less_2_final_cycle36
+L__NullDraw_less_2_final_cycle108:
+;dsPIC_VGA.c,220 :: 		snakeInit();
 	CALL	_snakeInit
-;dsPIC_VGA.c,187 :: 		} else {
-	GOTO	L_NullDraw_less_2_final_cycle4
-L_NullDraw_less_2_final_cycle3:
-;dsPIC_VGA.c,189 :: 		REP(0,1,5, NOP)
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-;dsPIC_VGA.c,191 :: 		}
-L_NullDraw_less_2_final_cycle4:
-;dsPIC_VGA.c,195 :: 		if (*snake.ipos == 0) {
+;dsPIC_VGA.c,222 :: 		}
+L_NullDraw_less_2_final_cycle36:
+;dsPIC_VGA.c,226 :: 		if (*snake.ipos == 0) {
 	MOV	_snake, W0
 	MOV.B	[W0], W0
 	CP.B	W0, #0
-	BRA Z	L__NullDraw_less_2_final_cycle47
-	GOTO	L_NullDraw_less_2_final_cycle5
-L__NullDraw_less_2_final_cycle47:
-;dsPIC_VGA.c,197 :: 		*snake.fpos = 0;
+	BRA Z	L__NullDraw_less_2_final_cycle109
+	GOTO	L_NullDraw_less_2_final_cycle37
+L__NullDraw_less_2_final_cycle109:
+;dsPIC_VGA.c,228 :: 		*snake.fpos = 0;
 	MOV	_snake+6, W1
 	CLR	W0
 	MOV.B	W0, [W1]
-;dsPIC_VGA.c,199 :: 		snake.fpos = snake.fpos + snake.fdiry * MATRIX_COLUMNS + snake.fdirx;
+;dsPIC_VGA.c,230 :: 		snake.fpos = snake.fpos + snake.fdiry * MATRIX_COLUMNS + snake.fdirx;
 	MOV	#lo_addr(_snake+10), W0
 	SE	[W0], W1
 	MOV	#40, W0
@@ -6010,22 +6416,16 @@ L__NullDraw_less_2_final_cycle47:
 	ADD	W2, [W0], W1
 	MOV	#lo_addr(_snake+9), W0
 	SE	[W0], W0
-	ADD	W1, W0, W1
-	MOV	W1, _snake+6
-;dsPIC_VGA.c,201 :: 		*snake.fpos = (snake.fdir << 4) | 1;
-	MOV	#lo_addr(_snake+8), W0
-	SE	[W0], W0
-	SL	W0, #4, W0
-	IOR	W0, #1, W0
-	MOV.B	W0, [W1]
-;dsPIC_VGA.c,203 :: 		} else {
-	GOTO	L_NullDraw_less_2_final_cycle6
-L_NullDraw_less_2_final_cycle5:
-;dsPIC_VGA.c,205 :: 		REP(0,0,3, NOP)
+	ADD	W1, W0, W0
+	MOV	W0, _snake+6
+;dsPIC_VGA.c,234 :: 		} else {
+	GOTO	L_NullDraw_less_2_final_cycle38
+L_NullDraw_less_2_final_cycle37:
+;dsPIC_VGA.c,236 :: 		REP(0,0,3, NOP)
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,207 :: 		REP(0,1,0, NOP)
+;dsPIC_VGA.c,238 :: 		REP(0,1,0, NOP)
 	NOP
 	NOP
 	NOP
@@ -6036,23 +6436,16 @@ L_NullDraw_less_2_final_cycle5:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,209 :: 		REP(0,0,6, NOP)
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-	NOP
-;dsPIC_VGA.c,211 :: 		}
-L_NullDraw_less_2_final_cycle6:
-;dsPIC_VGA.c,215 :: 		*snake.ipos = (snake.idir << 4) | 1;
+;dsPIC_VGA.c,242 :: 		}
+L_NullDraw_less_2_final_cycle38:
+;dsPIC_VGA.c,246 :: 		*snake.ipos = (snake.idir << 4) | 1;
 	MOV	#lo_addr(_snake+2), W0
 	SE	[W0], W0
 	SL	W0, #4, W0
 	IOR	W0, #1, W1
 	MOV	_snake, W0
 	MOV.B	W1, [W0]
-;dsPIC_VGA.c,218 :: 		REP(0, 3, 7, NOP)
+;dsPIC_VGA.c,249 :: 		REP(0, 4, 5, NOP)
 	NOP
 	NOP
 	NOP
@@ -6090,10 +6483,6 @@ L_NullDraw_less_2_final_cycle6:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,219 :: 		} else {
-	GOTO	L_NullDraw_less_2_final_cycle7
-L_NullDraw_less_2_final_cycle0:
-;dsPIC_VGA.c,220 :: 		REP(1, 5, 5, NOP)
 	NOP
 	NOP
 	NOP
@@ -6102,6 +6491,10 @@ L_NullDraw_less_2_final_cycle0:
 	NOP
 	NOP
 	NOP
+;dsPIC_VGA.c,250 :: 		} else {
+	GOTO	L_NullDraw_less_2_final_cycle39
+L_NullDraw_less_2_final_cycle18:
+;dsPIC_VGA.c,251 :: 		REP(1, 5, 5, NOP)
 	NOP
 	NOP
 	NOP
@@ -6249,22 +6642,30 @@ L_NullDraw_less_2_final_cycle0:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,221 :: 		}
-L_NullDraw_less_2_final_cycle7:
-;dsPIC_VGA.c,225 :: 		VGA_COLOR = 0; REP(0, 0, 3, NOP)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+;dsPIC_VGA.c,252 :: 		}
+L_NullDraw_less_2_final_cycle39:
+;dsPIC_VGA.c,256 :: 		VGA_COLOR = 0; REP(0, 0, 3, NOP)
 	CLR	LATD
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,226 :: 		}
+;dsPIC_VGA.c,257 :: 		}
 L_end_NullDraw_less_2_final_cycle:
 	RETURN
 ; end of _NullDraw_less_2_final_cycle
 
 _HSync_nops:
 
-;dsPIC_VGA.c,228 :: 		void HSync_nops() {
-;dsPIC_VGA.c,229 :: 		REP(0, 1, 9, NOP)
+;dsPIC_VGA.c,259 :: 		void HSync_nops() {
+;dsPIC_VGA.c,260 :: 		REP(0, 1, 9, NOP)
 	NOP
 	NOP
 	NOP
@@ -6284,7 +6685,7 @@ _HSync_nops:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,230 :: 		}
+;dsPIC_VGA.c,261 :: 		}
 L_end_HSync_nops:
 	RETURN
 ; end of _HSync_nops
@@ -6298,38 +6699,38 @@ _main:
 	MOV	#4, W0
 	IOR	68
 
-;dsPIC_VGA.c,236 :: 		int main()
-;dsPIC_VGA.c,238 :: 		config();
+;dsPIC_VGA.c,267 :: 		int main()
+;dsPIC_VGA.c,269 :: 		config();
 	CALL	_config
-;dsPIC_VGA.c,239 :: 		snakeInit();
+;dsPIC_VGA.c,270 :: 		snakeInit();
 	CALL	_snakeInit
-;dsPIC_VGA.c,241 :: 		while(1) {
-L_main8:
-;dsPIC_VGA.c,243 :: 		vsync_on;
+;dsPIC_VGA.c,272 :: 		while(1) {
+L_main40:
+;dsPIC_VGA.c,274 :: 		vsync_on;
 	BCLR.B	LATEbits, #2
-;dsPIC_VGA.c,244 :: 		HSYNC_NOPS NullDraw();
+;dsPIC_VGA.c,275 :: 		HSYNC_NOPS NullDraw();
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw
-;dsPIC_VGA.c,245 :: 		HSYNC_NOPS NullDraw();
+;dsPIC_VGA.c,276 :: 		HSYNC_NOPS NullDraw();
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw
-;dsPIC_VGA.c,246 :: 		HSYNC_NOPS NullDraw();
+;dsPIC_VGA.c,277 :: 		HSYNC_NOPS NullDraw();
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw
-;dsPIC_VGA.c,247 :: 		HSYNC_NOPS NullDraw();
+;dsPIC_VGA.c,278 :: 		HSYNC_NOPS NullDraw();
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw
-;dsPIC_VGA.c,248 :: 		vsync_off;
+;dsPIC_VGA.c,279 :: 		vsync_off;
 	BSET.B	LATEbits, #2
-;dsPIC_VGA.c,251 :: 		REP(0, 2, 3, HSYNC_NOPS NullDraw();)
+;dsPIC_VGA.c,282 :: 		REP(0, 2, 3, HSYNC_NOPS NullDraw();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -6422,7 +6823,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw
-;dsPIC_VGA.c,254 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_0();)
+;dsPIC_VGA.c,285 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_0();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -6503,7 +6904,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_0
-;dsPIC_VGA.c,255 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_1();)
+;dsPIC_VGA.c,286 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_1();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -6584,7 +6985,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_1
-;dsPIC_VGA.c,256 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_2();)
+;dsPIC_VGA.c,287 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_2();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -6665,7 +7066,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_2
-;dsPIC_VGA.c,257 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_3();)
+;dsPIC_VGA.c,288 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_3();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -6746,7 +7147,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_3
-;dsPIC_VGA.c,258 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_4();)
+;dsPIC_VGA.c,289 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_4();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -6827,7 +7228,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_4
-;dsPIC_VGA.c,259 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_5();)
+;dsPIC_VGA.c,290 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_5();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -6908,7 +7309,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_5
-;dsPIC_VGA.c,260 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_6();)
+;dsPIC_VGA.c,291 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_6();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -6989,7 +7390,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_6
-;dsPIC_VGA.c,261 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_7();)
+;dsPIC_VGA.c,292 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_7();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7070,7 +7471,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_7
-;dsPIC_VGA.c,262 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_8();)
+;dsPIC_VGA.c,293 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_8();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7151,7 +7552,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_8
-;dsPIC_VGA.c,263 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_9();)
+;dsPIC_VGA.c,294 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_9();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7232,7 +7633,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_9
-;dsPIC_VGA.c,264 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_10();)
+;dsPIC_VGA.c,295 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_10();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7313,7 +7714,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_10
-;dsPIC_VGA.c,265 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_11();)
+;dsPIC_VGA.c,296 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_11();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7394,7 +7795,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_11
-;dsPIC_VGA.c,266 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_12();)
+;dsPIC_VGA.c,297 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_12();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7475,7 +7876,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_12
-;dsPIC_VGA.c,267 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_13();)
+;dsPIC_VGA.c,298 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_13();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7556,7 +7957,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_13
-;dsPIC_VGA.c,268 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_14();)
+;dsPIC_VGA.c,299 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_14();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7637,7 +8038,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_14
-;dsPIC_VGA.c,269 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_15();)
+;dsPIC_VGA.c,300 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_15();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7718,7 +8119,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_15
-;dsPIC_VGA.c,270 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_16();)
+;dsPIC_VGA.c,301 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_16();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7799,7 +8200,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_16
-;dsPIC_VGA.c,271 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_17();)
+;dsPIC_VGA.c,302 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_17();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7880,7 +8281,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_17
-;dsPIC_VGA.c,272 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_18();)
+;dsPIC_VGA.c,303 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_18();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -7961,7 +8362,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_18
-;dsPIC_VGA.c,273 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_19();)
+;dsPIC_VGA.c,304 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_19();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -8042,7 +8443,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_19
-;dsPIC_VGA.c,274 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_20();)
+;dsPIC_VGA.c,305 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_20();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -8123,7 +8524,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_20
-;dsPIC_VGA.c,275 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_21();)
+;dsPIC_VGA.c,306 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_21();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -8204,7 +8605,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_21
-;dsPIC_VGA.c,276 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_22();)
+;dsPIC_VGA.c,307 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_22();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -8285,7 +8686,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_22
-;dsPIC_VGA.c,277 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_23();)
+;dsPIC_VGA.c,308 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_23();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -8366,7 +8767,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_23
-;dsPIC_VGA.c,278 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_24();)
+;dsPIC_VGA.c,309 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_24();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -8447,7 +8848,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_24
-;dsPIC_VGA.c,279 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_25();)
+;dsPIC_VGA.c,310 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_25();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -8528,7 +8929,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_25
-;dsPIC_VGA.c,280 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_26();)
+;dsPIC_VGA.c,311 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_26();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -8609,7 +9010,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_26
-;dsPIC_VGA.c,281 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_27();)
+;dsPIC_VGA.c,312 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_27();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -8690,7 +9091,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_27
-;dsPIC_VGA.c,282 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_28();)
+;dsPIC_VGA.c,313 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_28();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -8771,7 +9172,7 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_28
-;dsPIC_VGA.c,283 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_29();)
+;dsPIC_VGA.c,314 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_29();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -8852,14 +9253,14 @@ L_main8:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_Draw_29
-;dsPIC_VGA.c,287 :: 		HSYNC_NOPS NullDraw_less_2_final_cycle();
+;dsPIC_VGA.c,318 :: 		HSYNC_NOPS NullDraw_less_2_final_cycle();
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw_less_2_final_cycle
-;dsPIC_VGA.c,288 :: 		}
-	GOTO	L_main8
-;dsPIC_VGA.c,289 :: 		}
+;dsPIC_VGA.c,319 :: 		}
+	GOTO	L_main40
+;dsPIC_VGA.c,320 :: 		}
 L_end_main:
 L__main_end_loop:
 	BRA	L__main_end_loop

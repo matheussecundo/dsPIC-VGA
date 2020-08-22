@@ -1175,7 +1175,9 @@ cnpu2bits
 cnterr
 cnterr
 cnterr_bit
+compare
 config
+copy
 corcon
 corconbits
 cosc
@@ -2242,6 +2244,7 @@ filhit0
 filhit0_bit
 filhit1
 filhit2
+fill
 float_fpack
 fltacon
 fltaconbits
@@ -3114,6 +3117,7 @@ matherr
 matherr
 matherr_bit
 matrix
+matrix_default
 max
 maxcnt
 maxcnt_0
@@ -4677,6 +4681,8 @@ ridle_u2sta_bit
 rnd
 rnd_
 rnd_bit
+rotatel
+rotater
 rsen
 rsen
 rsen_bit
@@ -5906,6 +5912,7 @@ ton_t3con_bit
 ton_t4con_bit
 ton_t5con_bit
 toupper
+toupper_str
 tqckps
 tqckps0
 tqckps0

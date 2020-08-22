@@ -23,6 +23,8 @@ unsigned int current_vertical_line = 0; // current line for render
 
 #include "macros.h"
 
+#include "utils.h"
+
 #define MATRIX_LINES 30
 #define MATRIX_COLUMNS 40
 
@@ -31,10 +33,18 @@ unsigned int current_vertical_line = 0; // current line for render
 #include "snake.h"
 
 void snakeInit() {
-	snake.ipos = &matrix[15 * MATRIX_COLUMNS + 19];
+	copy(matrix_default, matrix, MATRIX_LINES * MATRIX_COLUMNS);
+
+	snake.ipos = &matrix[14 * MATRIX_COLUMNS + 19];
 	snake.fpos = &matrix[15 * MATRIX_COLUMNS + 19];
 	*snake.ipos = 0b10010001;
 	*snake.fpos = 0b10010001;
+	snake.idir = 0b1001;
+	snake.idirx = 0;
+	snake.idiry = -1;
+	snake.fdir = 0b1001;
+	snake.fdirx = 0;
+	snake.fdiry = -1;
 }
 
 void config()
@@ -143,17 +153,46 @@ void NullDraw() {
 	VGA_COLOR = 0; REP(0, 0, 5, NOP);
 }
 
-void NullDraw_less_2_final_cycle() {
+void SNAKE_NullDraw_less_2_final_cycle() {
 	// 88 / 5 = 17.6 cycles
 	REP(0, 1, 5, NOP)
 
 	// 800 / 5 = 160 cycles /////////////////////////
 	if (current_vertical_line >= 36000) {
 
-		// 36 cycles ///////////////////////
-		snake.idir = (*snake.ipos) >> 4;
-		snake.idirx = (snake.idir >> 2) - 2;
-		snake.idiry = (snake.idir & 0x3) - 2;
+		// 46 cycles ////////////////////////
+		if (PORTBbits.RB0 && snake.idirx != 1) {
+			snake.idir = 0b0110;
+			snake.idirx = -1;
+			snake.idiry = 0;
+			*snake.ipos = (*snake.ipos & 0xf) | 0b01100000;
+			REP(0,2,7, NOP)
+		} else if (PORTBbits.RB1 && snake.idiry != 1) {
+			snake.idir = 0b1001;
+			snake.idirx = 0;
+			snake.idiry = -1;
+			*snake.ipos = (*snake.ipos & 0xf) | 0b10010000;
+			REP(0,2,0, NOP)
+		} else if (PORTBbits.RB2 && snake.idirx != -1) {
+			snake.idir = 0b1110;
+			snake.idirx = 1;
+			snake.idiry = 0;
+			*snake.ipos = (*snake.ipos & 0xf) | 0b11100000;
+			REP(0,1,3, NOP)
+		} else if (PORTBbits.RB3 && snake.idiry != -1) {
+			snake.idir = 0b1011;
+			snake.idirx = 0;
+			snake.idiry = 1;
+			*snake.ipos = (*snake.ipos & 0xf) | 0b10110000;
+			REP(0,0,6, NOP)
+		} else {
+			snake.idir = (*snake.ipos) >> 4;
+			snake.idirx = (snake.idir >> 2) - 2;
+			snake.idiry = (snake.idir & 0x3) - 2;
+		}
+		////////////////////////////////////
+
+		// 18 cycles ///////////////////////
 		snake.fdir = (*snake.fpos) >> 4;
 		snake.fdirx = (snake.fdir >> 2) - 2;
 		snake.fdiry = (snake.fdir & 0x3) - 2;
@@ -167,26 +206,18 @@ void NullDraw_less_2_final_cycle() {
 		snake.ipos = snake.ipos + snake.idiry * MATRIX_COLUMNS + snake.idirx;
 		////////////////////////////////////
 
-		// 20 cycles ///////////////////////
+		// 5 cycles ///////////////////////
 		if ((*snake.ipos & 0x7) == 1) {
 
 			snakeInit();
 
-		} else {
-
-			REP(0,1,5, NOP)
-
 		}
 		////////////////////////////////////
 
-		// 20 cycles ///////////////////////
+		// 5 cycles ///////////////////////
 		if (*snake.ipos == 7) {
 
 			snakeInit();
-
-		} else {
-
-			REP(0,1,5, NOP)
 
 		}
 		////////////////////////////////////
@@ -198,7 +229,7 @@ void NullDraw_less_2_final_cycle() {
 
 			snake.fpos = snake.fpos + snake.fdiry * MATRIX_COLUMNS + snake.fdirx;
 
-			*snake.fpos = (snake.fdir << 4) | 1;
+			// *snake.fpos = (snake.fdir << 4) | 1;
 
 		} else {
 
@@ -206,7 +237,7 @@ void NullDraw_less_2_final_cycle() {
 
 			REP(0,1,0, NOP)
 
-			REP(0,0,6, NOP)
+			// REP(0,0,6, NOP)
 
 		}
 		////////////////////////////////////
@@ -215,7 +246,7 @@ void NullDraw_less_2_final_cycle() {
 		*snake.ipos = (snake.idir << 4) | 1;
 		////////////////////////////////////
 
-		REP(0, 3, 7, NOP)
+		REP(0, 4, 5, NOP)
 	} else {
 		REP(1, 5, 5, NOP)
 	}
@@ -284,6 +315,6 @@ int main()
 		/////////////////////////////////////
 
 		//1 = 0.0264 ms
-		HSYNC_NOPS NullDraw_less_2_final_cycle();
+		HSYNC_NOPS SNAKE_NullDraw_less_2_final_cycle();
 	}
 }

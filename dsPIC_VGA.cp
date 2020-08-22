@@ -2,8 +2,104 @@
 #line 22 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
 unsigned int current_vertical_line = 0;
 #line 1 "c:/git/dspic-vga/macros.h"
+#line 1 "c:/git/dspic-vga/utils.h"
+#line 23 "c:/git/dspic-vga/utils.h"
+void rotateL(unsigned char *start, unsigned char *end)
+{
+ unsigned char aux;
+ aux = *start;
+ while (start < end)
+ {
+ *start = *(start + 1);
+ start++;
+ }
+ *end = aux;
+}
+
+void rotateR(unsigned char *start, unsigned char *end)
+{
+ unsigned char aux;
+ aux = *end;
+ while (start < end)
+ {
+ *end = *(end - 1);
+ end--;
+ }
+ *start = aux;
+}
+
+void fill(unsigned char *data0, unsigned int size, unsigned char value)
+{
+ unsigned int i;
+ for (i = 0; i < size; i++) data0[i] = value;
+}
+
+void copy(unsigned char *data0, unsigned char *destination, unsigned int size)
+{
+ unsigned int i;
+ for (i = 0; i < size; i++) destination[i] = data0[i];
+}
+
+char compare(unsigned char *data0, unsigned char *data1, unsigned int size)
+{
+ unsigned int i;
+ for (i = 0; i < size; i++)
+ {
+ if (data0[i] != data1[i]) {
+ if (data0[i] < data1[i]) {
+ return -1;
+ } else {
+ return 1;
+ }
+ }
+ }
+ return 0;
+}
+
+void toupper_str(unsigned char *str)
+{
+ while (*str)
+ {
+ *str = toupper(*str);
+ str++;
+ }
+}
 #line 1 "c:/git/dspic-vga/matrix.h"
 unsigned short matrix[ 30  *  40 ] =
+{
+ 7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+ 7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+};
+
+const unsigned short matrix_default[ 30  *  40 ] =
 {
  7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
  7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
@@ -49,12 +145,20 @@ struct SNAKE {
  short fdirx;
  short fdiry;
 } snake;
-#line 33 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
+#line 35 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
 void snakeInit() {
- snake.ipos = &matrix[15 *  40  + 19];
+ copy(matrix_default, matrix,  30  *  40 );
+
+ snake.ipos = &matrix[14 *  40  + 19];
  snake.fpos = &matrix[15 *  40  + 19];
  *snake.ipos = 0b10010001;
  *snake.fpos = 0b10010001;
+ snake.idir = 0b1001;
+ snake.idirx = 0;
+ snake.idiry = -1;
+ snake.fdir = 0b1001;
+ snake.fdirx = 0;
+ snake.fdiry = -1;
 }
 
 void config()
@@ -67,9 +171,9 @@ void config()
 
  TRISE = 0;
  TRISD = 0;
- TRISB = 0;
+ TRISB = 0xf;
 }
-#line 104 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
+#line 114 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
  void Draw_0 () {    asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 0]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 0] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 2]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 2] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 4]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 4] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 6]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 6] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 8]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 8] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 10]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 10] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 12]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 12] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 14]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 14] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 16]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 16] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 18]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 18] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 20]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 20] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 22]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 22] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 24]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 24] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 26]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 26] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 28]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 28] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 30]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 30] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 32]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 32] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 34]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 34] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 36]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 36] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 38]; asm {nop;}  LATD  = *(unsigned int *)&matrix[0 * 40  + 38] >> 8; asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  LATD  = 0; current_vertical_line++;      asm {nop;} } 
  void Draw_1 () {    asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 0]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 0] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 2]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 2] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 4]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 4] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 6]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 6] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 8]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 8] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 10]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 10] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 12]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 12] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 14]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 14] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 16]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 16] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 18]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 18] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 20]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 20] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 22]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 22] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 24]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 24] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 26]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 26] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 28]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 28] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 30]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 30] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 32]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 32] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 34]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 34] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 36]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 36] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 38]; asm {nop;}  LATD  = *(unsigned int *)&matrix[1 * 40  + 38] >> 8; asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  LATD  = 0; current_vertical_line++;      asm {nop;} } 
  void Draw_2 () {    asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 0]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 0] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 2]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 2] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 4]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 4] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 6]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 6] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 8]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 8] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 10]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 10] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 12]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 12] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 14]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 14] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 16]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 16] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 18]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 18] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 20]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 20] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 22]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 22] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 24]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 24] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 26]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 26] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 28]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 28] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 30]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 30] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 32]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 32] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 34]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 34] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 36]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 36] >> 8; asm {nop;}  asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 38]; asm {nop;}  LATD  = *(unsigned int *)&matrix[2 * 40  + 38] >> 8; asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  LATD  = 0; current_vertical_line++;      asm {nop;} } 
@@ -120,9 +224,38 @@ void NullDraw_less_2_final_cycle() {
  if (current_vertical_line >= 36000) {
 
 
+ if (PORTBbits.RB0 && snake.idirx != 1) {
+ snake.idir = 0b0110;
+ snake.idirx = -1;
+ snake.idiry = 0;
+ *snake.ipos = (*snake.ipos & 0xf) | 0b01100000;
+     asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+ } else if (PORTBbits.RB1 && snake.idiry != 1) {
+ snake.idir = 0b1001;
+ snake.idirx = 0;
+ snake.idiry = -1;
+ *snake.ipos = (*snake.ipos & 0xf) | 0b10010000;
+     asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   
+ } else if (PORTBbits.RB2 && snake.idirx != -1) {
+ snake.idir = 0b1110;
+ snake.idirx = 1;
+ snake.idiry = 0;
+ *snake.ipos = (*snake.ipos & 0xf) | 0b11100000;
+     asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;} 
+ } else if (PORTBbits.RB3 && snake.idiry != -1) {
+ snake.idir = 0b1011;
+ snake.idirx = 0;
+ snake.idiry = 1;
+ *snake.ipos = (*snake.ipos & 0xf) | 0b10110000;
+       asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+ } else {
  snake.idir = (*snake.ipos) >> 4;
  snake.idirx = (snake.idir >> 2) - 2;
  snake.idiry = (snake.idir & 0x3) - 2;
+ }
+
+
+
  snake.fdir = (*snake.fpos) >> 4;
  snake.fdirx = (snake.fdir >> 2) - 2;
  snake.fdiry = (snake.fdir & 0x3) - 2;
@@ -141,10 +274,6 @@ void NullDraw_less_2_final_cycle() {
 
  snakeInit();
 
- } else {
-
-     asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
-
  }
 
 
@@ -152,10 +281,6 @@ void NullDraw_less_2_final_cycle() {
  if (*snake.ipos == 7) {
 
  snakeInit();
-
- } else {
-
-     asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
 
  }
 
@@ -167,7 +292,7 @@ void NullDraw_less_2_final_cycle() {
 
  snake.fpos = snake.fpos + snake.fdiry *  40  + snake.fdirx;
 
- *snake.fpos = (snake.fdir << 4) | 1;
+
 
  } else {
 
@@ -175,7 +300,7 @@ void NullDraw_less_2_final_cycle() {
 
      asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   
 
-       asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+
 
  }
 
@@ -184,7 +309,7 @@ void NullDraw_less_2_final_cycle() {
  *snake.ipos = (snake.idir << 4) | 1;
 
 
-     asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+     asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
  } else {
    asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
  }
