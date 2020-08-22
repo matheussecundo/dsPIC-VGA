@@ -21,61 +21,12 @@
 
 unsigned int current_vertical_line = 0; // current line for render
 
-#define NOP asm {nop;}
+#include "defines_utils.h"
 
-#define REP0(X)
-#define REP1(X) X
-#define REP2(X) REP1(X) X
-#define REP3(X) REP2(X) X
-#define REP4(X) REP3(X) X
-#define REP5(X) REP4(X) X
-#define REP6(X) REP5(X) X
-#define REP7(X) REP6(X) X
-#define REP8(X) REP7(X) X
-#define REP9(X) REP8(X) X
-#define REP10(X) REP9(X) X
-#define REP(HUNDREDS,TENS,ONES,X) REP##HUNDREDS(REP10(REP10(X))) REP##TENS(REP10(X)) REP##ONES(X)
+#define MATRIX_LINES 30
+#define MATRIX_COLUMNS 40
 
-char matrix[37][32] =
-{
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
-	{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7}
-};
+#include "matrix.h"
 
 void config()
 {
@@ -90,106 +41,87 @@ void config()
 	TRISB = 0;
 }
 
-void Draw() {
-	// 88 / 5 = 17.6 cycles ///////////////////////////////////////////////
-	REP(0, 1, 5, NOP)
-	///////////////////////////////////////////////////////////////////////
+#define DEFINE_DRAW(LINE)\
+void Draw_##LINE() {\
+	REP(0, 1, 3, NOP)\
+\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS +  0]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS +  0] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS +  2]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS +  2] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS +  4]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS +  4] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS +  6]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS +  6] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS +  8]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS +  8] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 10]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 10] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 12]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 12] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 14]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 14] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 16]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 16] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 18]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 18] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 20]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 20] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 22]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 22] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 24]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 24] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 26]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 26] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 28]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 28] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 30]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 30] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 32]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 32] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 34]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 34] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 36]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 36] >> 8;NOP NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 38]; NOP\
+	VGA_COLOR = *(unsigned int *)&matrix[LINE * MATRIX_COLUMNS + 38] >> 8;NOP NOP\
+	NOP NOP\
+\
+	VGA_COLOR = 0;\
+	current_vertical_line++;\
+	REP(0, 0, 1, NOP)\
+}\
 
-	// 800 / 5 = 160 cycles
-
-	VGA_COLOR = current_vertical_line;
-	VGA_COLOR = 2;
-	VGA_COLOR = 1;
-	VGA_COLOR = 2;
-	VGA_COLOR = 1;
-	VGA_COLOR = 2;
-	VGA_COLOR = 1;
-	VGA_COLOR = 2;
-	VGA_COLOR = 1;
-	VGA_COLOR = 2;
-
-	VGA_COLOR = 1;
-	VGA_COLOR = 1;
-	VGA_COLOR = 1;
-	VGA_COLOR = 1;
-	VGA_COLOR = 1;
-	VGA_COLOR = 1;
-	VGA_COLOR = 1;
-	VGA_COLOR = 1;
-	VGA_COLOR = 1;
-	VGA_COLOR = 1;
-
-	VGA_COLOR = 2;
-	VGA_COLOR = 2;
-	VGA_COLOR = 2;
-	VGA_COLOR = 2;
-	VGA_COLOR = 2;
-	VGA_COLOR = 2;
-	VGA_COLOR = 2;
-	VGA_COLOR = 2;
-	VGA_COLOR = 2;
-	VGA_COLOR = 2;
-
-	VGA_COLOR = 3;
-	VGA_COLOR = 3;
-	VGA_COLOR = 3;
-	VGA_COLOR = 3;
-	VGA_COLOR = 3;
-	VGA_COLOR = 3;
-	VGA_COLOR = 3;
-	VGA_COLOR = 3;
-	VGA_COLOR = 3;
-	VGA_COLOR = 3;
-
-	VGA_COLOR = 4;
-	VGA_COLOR = 4;
-	VGA_COLOR = 4;
-	VGA_COLOR = 4;
-	VGA_COLOR = 4;
-	VGA_COLOR = 4;
-	VGA_COLOR = 4;
-	VGA_COLOR = 4;
-	VGA_COLOR = 4;
-	VGA_COLOR = 4;
-	
-	VGA_COLOR = 5;
-	VGA_COLOR = 5;
-	VGA_COLOR = 5;
-	VGA_COLOR = 5;
-	VGA_COLOR = 5;
-	VGA_COLOR = 5;
-	VGA_COLOR = 5;
-	VGA_COLOR = 5;
-	VGA_COLOR = 5;
-	VGA_COLOR = 5;
-
-	VGA_COLOR = 6;
-	VGA_COLOR = 6;
-	VGA_COLOR = 6;
-	VGA_COLOR = 6;
-	VGA_COLOR = 6;
-	VGA_COLOR = 6;
-	VGA_COLOR = 6;
-	VGA_COLOR = 6;
-	VGA_COLOR = 6;
-	VGA_COLOR = 6;
-
-	VGA_COLOR = 7;
-	VGA_COLOR = 7;
-	VGA_COLOR = 7;
-	VGA_COLOR = 7;
-	VGA_COLOR = 7;
-	VGA_COLOR = 7;
-	VGA_COLOR = 7;
-	VGA_COLOR = 7;
-	VGA_COLOR = 7;
-	VGA_COLOR = 7;
-
-	// 40 / 5 = 8 cycles
-	VGA_COLOR = 0;
-	current_vertical_line++; // 4 cycles
-	REP(0, 0, 1, NOP)
-}
+DEFINE_DRAW(0)
+DEFINE_DRAW(1)
+DEFINE_DRAW(2)
+DEFINE_DRAW(3)
+DEFINE_DRAW(4)
+DEFINE_DRAW(5)
+DEFINE_DRAW(6)
+DEFINE_DRAW(7)
+DEFINE_DRAW(8)
+DEFINE_DRAW(9)
+DEFINE_DRAW(10)
+DEFINE_DRAW(11)
+DEFINE_DRAW(12)
+DEFINE_DRAW(13)
+DEFINE_DRAW(14)
+DEFINE_DRAW(15)
+DEFINE_DRAW(16)
+DEFINE_DRAW(17)
+DEFINE_DRAW(18)
+DEFINE_DRAW(19)
+DEFINE_DRAW(20)
+DEFINE_DRAW(21)
+DEFINE_DRAW(22)
+DEFINE_DRAW(23)
+DEFINE_DRAW(24)
+DEFINE_DRAW(25)
+DEFINE_DRAW(26)
+DEFINE_DRAW(27)
+DEFINE_DRAW(28)
+DEFINE_DRAW(29)
 
 void NullDraw() {
 	// 88 / 5 = 17.6 cycles
@@ -224,7 +156,7 @@ int main()
 	config();
 
 	while(1) {
-		// 0.1056 ms
+		//4 = 0.1056 ms
 		vsync_on;
 		HSYNC_NOPS NullDraw();
 		HSYNC_NOPS NullDraw();
@@ -232,13 +164,43 @@ int main()
 		HSYNC_NOPS NullDraw();
 		vsync_off;
 
-		//0.6072 ms
+		//23 = 0.6072 ms
 		REP(0, 2, 3, HSYNC_NOPS NullDraw();)
 
-		// 15.84 ms
-		REP(6, 0, 0, HSYNC_NOPS Draw();)
+		//600 = 15.84 ms ////////////////////
+		REP(0, 2, 0, HSYNC_NOPS Draw_0();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_1();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_2();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_3();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_4();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_5();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_6();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_7();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_8();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_9();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_10();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_11();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_12();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_13();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_14();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_15();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_16();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_17();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_18();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_19();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_20();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_21();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_22();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_23();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_24();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_25();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_26();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_27();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_28();)
+		REP(0, 2, 0, HSYNC_NOPS Draw_29();)
+		/////////////////////////////////////
 
-		// 0.0264 ms
+		//1 = 0.0264 ms
 		HSYNC_NOPS NullDraw_less_2_final_cycle();
 	}
 }

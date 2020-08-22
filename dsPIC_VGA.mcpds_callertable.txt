@@ -2,5 +2,34 @@ main
 	config
 	HSync_nops
 	NullDraw
-	Draw
+	Draw_0
+	Draw_1
+	Draw_2
+	Draw_3
+	Draw_4
+	Draw_5
+	Draw_6
+	Draw_7
+	Draw_8
+	Draw_9
+	Draw_10
+	Draw_11
+	Draw_12
+	Draw_13
+	Draw_14
+	Draw_15
+	Draw_16
+	Draw_17
+	Draw_18
+	Draw_19
+	Draw_20
+	Draw_21
+	Draw_22
+	Draw_23
+	Draw_24
+	Draw_25
+	Draw_26
+	Draw_27
+	Draw_28
+	Draw_29
 	NullDraw_less_2_final_cycle

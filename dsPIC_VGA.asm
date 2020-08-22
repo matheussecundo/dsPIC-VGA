@@ -1,33 +1,32 @@
 
 _config:
 
-;dsPIC_VGA.c,80 :: 		void config()
-;dsPIC_VGA.c,82 :: 		ADPCFG = 0xFFFF;
+;dsPIC_VGA.c,31 :: 		void config()
+;dsPIC_VGA.c,33 :: 		ADPCFG = 0xFFFF;
 	MOV	#65535, W0
 	MOV	WREG, ADPCFG
-;dsPIC_VGA.c,83 :: 		PORTB=0;
+;dsPIC_VGA.c,34 :: 		PORTB=0;
 	CLR	PORTB
-;dsPIC_VGA.c,84 :: 		PORTC=0;
+;dsPIC_VGA.c,35 :: 		PORTC=0;
 	CLR	PORTC
-;dsPIC_VGA.c,85 :: 		PORTD=0;
+;dsPIC_VGA.c,36 :: 		PORTD=0;
 	CLR	PORTD
-;dsPIC_VGA.c,86 :: 		PORTE=0;
+;dsPIC_VGA.c,37 :: 		PORTE=0;
 	CLR	PORTE
-;dsPIC_VGA.c,88 :: 		TRISE = 0;
+;dsPIC_VGA.c,39 :: 		TRISE = 0;
 	CLR	TRISE
-;dsPIC_VGA.c,89 :: 		TRISD = 0;
+;dsPIC_VGA.c,40 :: 		TRISD = 0;
 	CLR	TRISD
-;dsPIC_VGA.c,90 :: 		TRISB = 0;
+;dsPIC_VGA.c,41 :: 		TRISB = 0;
 	CLR	TRISB
-;dsPIC_VGA.c,91 :: 		}
+;dsPIC_VGA.c,42 :: 		}
 L_end_config:
 	RETURN
 ; end of _config
 
-_Draw:
+_Draw_0:
 
-;dsPIC_VGA.c,93 :: 		void Draw() {
-;dsPIC_VGA.c,95 :: 		REP(0, 1, 5, NOP)
+;dsPIC_VGA.c,95 :: 		DEFINE_DRAW(0)
 	NOP
 	NOP
 	NOP
@@ -41,265 +40,5604 @@ _Draw:
 	NOP
 	NOP
 	NOP
+	MOV	_matrix, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
 	NOP
 	NOP
-;dsPIC_VGA.c,100 :: 		VGA_COLOR = current_vertical_line;
-	MOV	_current_vertical_line, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,101 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,102 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,103 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,104 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,105 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,106 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,107 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,108 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,109 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,111 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,112 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,113 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,114 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,115 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,116 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,117 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,118 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,119 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,120 :: 		VGA_COLOR = 1;
-	MOV	#1, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,122 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,123 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,124 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,125 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,126 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,127 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,128 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,129 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,130 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,131 :: 		VGA_COLOR = 2;
-	MOV	#2, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,133 :: 		VGA_COLOR = 3;
-	MOV	#3, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,134 :: 		VGA_COLOR = 3;
-	MOV	#3, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,135 :: 		VGA_COLOR = 3;
-	MOV	#3, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,136 :: 		VGA_COLOR = 3;
-	MOV	#3, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,137 :: 		VGA_COLOR = 3;
-	MOV	#3, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,138 :: 		VGA_COLOR = 3;
-	MOV	#3, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,139 :: 		VGA_COLOR = 3;
-	MOV	#3, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,140 :: 		VGA_COLOR = 3;
-	MOV	#3, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,141 :: 		VGA_COLOR = 3;
-	MOV	#3, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,142 :: 		VGA_COLOR = 3;
-	MOV	#3, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,144 :: 		VGA_COLOR = 4;
-	MOV	#4, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,145 :: 		VGA_COLOR = 4;
-	MOV	#4, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,146 :: 		VGA_COLOR = 4;
-	MOV	#4, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,147 :: 		VGA_COLOR = 4;
-	MOV	#4, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,148 :: 		VGA_COLOR = 4;
-	MOV	#4, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,149 :: 		VGA_COLOR = 4;
-	MOV	#4, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,150 :: 		VGA_COLOR = 4;
-	MOV	#4, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,151 :: 		VGA_COLOR = 4;
-	MOV	#4, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,152 :: 		VGA_COLOR = 4;
-	MOV	#4, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,153 :: 		VGA_COLOR = 4;
-	MOV	#4, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,155 :: 		VGA_COLOR = 5;
-	MOV	#5, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,156 :: 		VGA_COLOR = 5;
-	MOV	#5, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,157 :: 		VGA_COLOR = 5;
-	MOV	#5, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,158 :: 		VGA_COLOR = 5;
-	MOV	#5, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,159 :: 		VGA_COLOR = 5;
-	MOV	#5, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,160 :: 		VGA_COLOR = 5;
-	MOV	#5, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,161 :: 		VGA_COLOR = 5;
-	MOV	#5, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,162 :: 		VGA_COLOR = 5;
-	MOV	#5, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,163 :: 		VGA_COLOR = 5;
-	MOV	#5, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,164 :: 		VGA_COLOR = 5;
-	MOV	#5, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,166 :: 		VGA_COLOR = 6;
-	MOV	#6, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,167 :: 		VGA_COLOR = 6;
-	MOV	#6, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,168 :: 		VGA_COLOR = 6;
-	MOV	#6, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,169 :: 		VGA_COLOR = 6;
-	MOV	#6, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,170 :: 		VGA_COLOR = 6;
-	MOV	#6, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,171 :: 		VGA_COLOR = 6;
-	MOV	#6, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,172 :: 		VGA_COLOR = 6;
-	MOV	#6, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,173 :: 		VGA_COLOR = 6;
-	MOV	#6, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,174 :: 		VGA_COLOR = 6;
-	MOV	#6, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,175 :: 		VGA_COLOR = 6;
-	MOV	#6, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,177 :: 		VGA_COLOR = 7;
-	MOV	#7, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,178 :: 		VGA_COLOR = 7;
-	MOV	#7, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,179 :: 		VGA_COLOR = 7;
-	MOV	#7, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,180 :: 		VGA_COLOR = 7;
-	MOV	#7, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,181 :: 		VGA_COLOR = 7;
-	MOV	#7, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,182 :: 		VGA_COLOR = 7;
-	MOV	#7, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,183 :: 		VGA_COLOR = 7;
-	MOV	#7, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,184 :: 		VGA_COLOR = 7;
-	MOV	#7, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,185 :: 		VGA_COLOR = 7;
-	MOV	#7, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,186 :: 		VGA_COLOR = 7;
-	MOV	#7, W0
-	MOV	WREG, LATD
-;dsPIC_VGA.c,189 :: 		VGA_COLOR = 0;
+	MOV	_matrix+2, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+2, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+4, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+4, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+6, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+6, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+8, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+8, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+10, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+10, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+12, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+12, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+14, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+14, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+16, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+16, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+18, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+18, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+20, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+20, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+22, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+22, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+24, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+24, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+26, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+26, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+28, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+28, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+30, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+30, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+32, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+32, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+34, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+34, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+36, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+36, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+38, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+38, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
 	CLR	LATD
-;dsPIC_VGA.c,190 :: 		current_vertical_line++; // 4 cycles
 	MOV	#1, W1
 	MOV	#lo_addr(_current_vertical_line), W0
 	ADD	W1, [W0], [W0]
-;dsPIC_VGA.c,191 :: 		REP(0, 0, 1, NOP)
 	NOP
-;dsPIC_VGA.c,192 :: 		}
-L_end_Draw:
+L_end_Draw_0:
 	RETURN
-; end of _Draw
+; end of _Draw_0
+
+_Draw_1:
+
+;dsPIC_VGA.c,96 :: 		DEFINE_DRAW(1)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+40, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+40, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+42, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+42, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+44, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+44, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+46, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+46, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+48, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+48, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+50, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+50, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+52, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+52, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+54, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+54, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+56, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+56, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+58, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+58, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+60, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+60, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+62, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+62, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+64, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+64, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+66, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+66, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+68, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+68, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+70, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+70, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+72, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+72, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+74, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+74, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+76, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+76, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+78, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+78, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_1:
+	RETURN
+; end of _Draw_1
+
+_Draw_2:
+
+;dsPIC_VGA.c,97 :: 		DEFINE_DRAW(2)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+80, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+80, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+82, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+82, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+84, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+84, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+86, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+86, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+88, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+88, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+90, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+90, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+92, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+92, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+94, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+94, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+96, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+96, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+98, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+98, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+100, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+100, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+102, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+102, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+104, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+104, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+106, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+106, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+108, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+108, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+110, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+110, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+112, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+112, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+114, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+114, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+116, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+116, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+118, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+118, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_2:
+	RETURN
+; end of _Draw_2
+
+_Draw_3:
+
+;dsPIC_VGA.c,98 :: 		DEFINE_DRAW(3)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+120, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+120, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+122, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+122, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+124, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+124, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+126, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+126, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+128, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+128, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+130, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+130, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+132, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+132, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+134, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+134, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+136, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+136, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+138, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+138, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+140, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+140, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+142, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+142, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+144, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+144, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+146, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+146, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+148, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+148, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+150, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+150, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+152, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+152, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+154, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+154, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+156, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+156, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+158, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+158, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_3:
+	RETURN
+; end of _Draw_3
+
+_Draw_4:
+
+;dsPIC_VGA.c,99 :: 		DEFINE_DRAW(4)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+160, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+160, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+162, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+162, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+164, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+164, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+166, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+166, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+168, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+168, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+170, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+170, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+172, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+172, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+174, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+174, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+176, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+176, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+178, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+178, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+180, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+180, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+182, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+182, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+184, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+184, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+186, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+186, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+188, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+188, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+190, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+190, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+192, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+192, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+194, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+194, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+196, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+196, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+198, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+198, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_4:
+	RETURN
+; end of _Draw_4
+
+_Draw_5:
+
+;dsPIC_VGA.c,100 :: 		DEFINE_DRAW(5)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+200, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+200, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+202, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+202, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+204, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+204, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+206, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+206, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+208, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+208, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+210, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+210, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+212, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+212, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+214, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+214, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+216, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+216, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+218, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+218, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+220, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+220, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+222, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+222, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+224, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+224, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+226, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+226, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+228, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+228, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+230, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+230, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+232, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+232, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+234, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+234, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+236, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+236, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+238, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+238, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_5:
+	RETURN
+; end of _Draw_5
+
+_Draw_6:
+
+;dsPIC_VGA.c,101 :: 		DEFINE_DRAW(6)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+240, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+240, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+242, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+242, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+244, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+244, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+246, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+246, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+248, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+248, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+250, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+250, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+252, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+252, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+254, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+254, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+256, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+256, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+258, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+258, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+260, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+260, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+262, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+262, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+264, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+264, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+266, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+266, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+268, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+268, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+270, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+270, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+272, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+272, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+274, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+274, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+276, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+276, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+278, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+278, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_6:
+	RETURN
+; end of _Draw_6
+
+_Draw_7:
+
+;dsPIC_VGA.c,102 :: 		DEFINE_DRAW(7)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+280, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+280, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+282, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+282, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+284, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+284, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+286, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+286, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+288, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+288, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+290, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+290, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+292, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+292, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+294, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+294, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+296, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+296, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+298, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+298, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+300, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+300, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+302, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+302, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+304, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+304, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+306, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+306, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+308, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+308, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+310, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+310, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+312, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+312, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+314, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+314, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+316, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+316, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+318, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+318, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_7:
+	RETURN
+; end of _Draw_7
+
+_Draw_8:
+
+;dsPIC_VGA.c,103 :: 		DEFINE_DRAW(8)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+320, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+320, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+322, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+322, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+324, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+324, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+326, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+326, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+328, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+328, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+330, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+330, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+332, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+332, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+334, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+334, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+336, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+336, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+338, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+338, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+340, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+340, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+342, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+342, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+344, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+344, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+346, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+346, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+348, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+348, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+350, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+350, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+352, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+352, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+354, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+354, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+356, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+356, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+358, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+358, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_8:
+	RETURN
+; end of _Draw_8
+
+_Draw_9:
+
+;dsPIC_VGA.c,104 :: 		DEFINE_DRAW(9)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+360, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+360, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+362, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+362, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+364, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+364, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+366, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+366, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+368, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+368, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+370, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+370, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+372, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+372, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+374, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+374, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+376, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+376, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+378, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+378, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+380, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+380, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+382, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+382, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+384, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+384, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+386, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+386, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+388, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+388, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+390, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+390, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+392, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+392, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+394, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+394, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+396, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+396, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+398, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+398, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_9:
+	RETURN
+; end of _Draw_9
+
+_Draw_10:
+
+;dsPIC_VGA.c,105 :: 		DEFINE_DRAW(10)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+400, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+400, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+402, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+402, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+404, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+404, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+406, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+406, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+408, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+408, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+410, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+410, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+412, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+412, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+414, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+414, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+416, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+416, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+418, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+418, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+420, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+420, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+422, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+422, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+424, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+424, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+426, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+426, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+428, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+428, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+430, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+430, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+432, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+432, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+434, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+434, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+436, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+436, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+438, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+438, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_10:
+	RETURN
+; end of _Draw_10
+
+_Draw_11:
+
+;dsPIC_VGA.c,106 :: 		DEFINE_DRAW(11)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+440, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+440, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+442, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+442, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+444, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+444, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+446, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+446, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+448, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+448, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+450, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+450, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+452, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+452, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+454, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+454, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+456, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+456, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+458, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+458, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+460, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+460, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+462, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+462, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+464, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+464, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+466, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+466, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+468, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+468, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+470, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+470, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+472, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+472, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+474, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+474, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+476, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+476, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+478, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+478, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_11:
+	RETURN
+; end of _Draw_11
+
+_Draw_12:
+
+;dsPIC_VGA.c,107 :: 		DEFINE_DRAW(12)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+480, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+480, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+482, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+482, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+484, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+484, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+486, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+486, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+488, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+488, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+490, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+490, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+492, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+492, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+494, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+494, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+496, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+496, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+498, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+498, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+500, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+500, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+502, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+502, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+504, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+504, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+506, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+506, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+508, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+508, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+510, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+510, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+512, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+512, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+514, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+514, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+516, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+516, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+518, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+518, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_12:
+	RETURN
+; end of _Draw_12
+
+_Draw_13:
+
+;dsPIC_VGA.c,108 :: 		DEFINE_DRAW(13)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+520, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+520, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+522, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+522, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+524, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+524, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+526, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+526, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+528, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+528, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+530, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+530, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+532, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+532, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+534, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+534, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+536, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+536, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+538, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+538, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+540, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+540, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+542, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+542, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+544, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+544, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+546, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+546, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+548, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+548, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+550, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+550, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+552, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+552, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+554, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+554, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+556, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+556, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+558, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+558, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_13:
+	RETURN
+; end of _Draw_13
+
+_Draw_14:
+
+;dsPIC_VGA.c,109 :: 		DEFINE_DRAW(14)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+560, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+560, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+562, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+562, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+564, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+564, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+566, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+566, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+568, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+568, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+570, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+570, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+572, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+572, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+574, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+574, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+576, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+576, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+578, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+578, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+580, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+580, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+582, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+582, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+584, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+584, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+586, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+586, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+588, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+588, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+590, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+590, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+592, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+592, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+594, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+594, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+596, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+596, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+598, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+598, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_14:
+	RETURN
+; end of _Draw_14
+
+_Draw_15:
+
+;dsPIC_VGA.c,110 :: 		DEFINE_DRAW(15)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+600, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+600, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+602, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+602, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+604, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+604, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+606, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+606, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+608, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+608, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+610, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+610, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+612, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+612, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+614, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+614, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+616, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+616, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+618, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+618, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+620, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+620, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+622, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+622, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+624, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+624, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+626, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+626, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+628, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+628, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+630, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+630, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+632, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+632, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+634, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+634, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+636, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+636, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+638, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+638, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_15:
+	RETURN
+; end of _Draw_15
+
+_Draw_16:
+
+;dsPIC_VGA.c,111 :: 		DEFINE_DRAW(16)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+640, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+640, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+642, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+642, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+644, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+644, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+646, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+646, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+648, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+648, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+650, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+650, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+652, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+652, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+654, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+654, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+656, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+656, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+658, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+658, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+660, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+660, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+662, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+662, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+664, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+664, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+666, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+666, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+668, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+668, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+670, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+670, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+672, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+672, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+674, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+674, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+676, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+676, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+678, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+678, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_16:
+	RETURN
+; end of _Draw_16
+
+_Draw_17:
+
+;dsPIC_VGA.c,112 :: 		DEFINE_DRAW(17)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+680, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+680, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+682, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+682, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+684, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+684, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+686, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+686, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+688, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+688, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+690, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+690, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+692, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+692, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+694, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+694, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+696, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+696, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+698, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+698, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+700, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+700, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+702, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+702, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+704, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+704, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+706, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+706, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+708, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+708, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+710, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+710, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+712, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+712, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+714, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+714, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+716, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+716, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+718, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+718, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_17:
+	RETURN
+; end of _Draw_17
+
+_Draw_18:
+
+;dsPIC_VGA.c,113 :: 		DEFINE_DRAW(18)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+720, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+720, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+722, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+722, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+724, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+724, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+726, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+726, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+728, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+728, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+730, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+730, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+732, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+732, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+734, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+734, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+736, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+736, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+738, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+738, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+740, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+740, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+742, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+742, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+744, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+744, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+746, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+746, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+748, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+748, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+750, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+750, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+752, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+752, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+754, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+754, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+756, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+756, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+758, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+758, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_18:
+	RETURN
+; end of _Draw_18
+
+_Draw_19:
+
+;dsPIC_VGA.c,114 :: 		DEFINE_DRAW(19)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+760, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+760, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+762, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+762, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+764, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+764, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+766, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+766, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+768, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+768, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+770, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+770, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+772, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+772, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+774, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+774, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+776, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+776, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+778, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+778, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+780, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+780, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+782, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+782, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+784, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+784, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+786, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+786, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+788, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+788, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+790, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+790, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+792, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+792, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+794, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+794, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+796, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+796, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+798, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+798, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_19:
+	RETURN
+; end of _Draw_19
+
+_Draw_20:
+
+;dsPIC_VGA.c,115 :: 		DEFINE_DRAW(20)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+800, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+800, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+802, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+802, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+804, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+804, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+806, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+806, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+808, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+808, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+810, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+810, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+812, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+812, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+814, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+814, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+816, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+816, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+818, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+818, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+820, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+820, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+822, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+822, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+824, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+824, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+826, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+826, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+828, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+828, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+830, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+830, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+832, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+832, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+834, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+834, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+836, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+836, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+838, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+838, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_20:
+	RETURN
+; end of _Draw_20
+
+_Draw_21:
+
+;dsPIC_VGA.c,116 :: 		DEFINE_DRAW(21)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+840, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+840, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+842, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+842, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+844, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+844, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+846, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+846, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+848, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+848, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+850, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+850, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+852, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+852, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+854, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+854, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+856, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+856, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+858, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+858, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+860, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+860, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+862, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+862, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+864, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+864, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+866, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+866, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+868, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+868, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+870, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+870, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+872, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+872, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+874, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+874, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+876, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+876, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+878, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+878, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_21:
+	RETURN
+; end of _Draw_21
+
+_Draw_22:
+
+;dsPIC_VGA.c,117 :: 		DEFINE_DRAW(22)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+880, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+880, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+882, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+882, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+884, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+884, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+886, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+886, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+888, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+888, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+890, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+890, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+892, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+892, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+894, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+894, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+896, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+896, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+898, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+898, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+900, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+900, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+902, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+902, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+904, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+904, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+906, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+906, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+908, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+908, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+910, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+910, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+912, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+912, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+914, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+914, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+916, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+916, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+918, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+918, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_22:
+	RETURN
+; end of _Draw_22
+
+_Draw_23:
+
+;dsPIC_VGA.c,118 :: 		DEFINE_DRAW(23)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+920, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+920, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+922, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+922, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+924, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+924, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+926, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+926, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+928, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+928, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+930, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+930, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+932, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+932, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+934, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+934, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+936, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+936, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+938, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+938, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+940, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+940, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+942, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+942, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+944, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+944, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+946, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+946, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+948, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+948, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+950, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+950, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+952, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+952, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+954, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+954, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+956, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+956, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+958, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+958, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_23:
+	RETURN
+; end of _Draw_23
+
+_Draw_24:
+
+;dsPIC_VGA.c,119 :: 		DEFINE_DRAW(24)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+960, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+960, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+962, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+962, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+964, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+964, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+966, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+966, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+968, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+968, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+970, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+970, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+972, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+972, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+974, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+974, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+976, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+976, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+978, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+978, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+980, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+980, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+982, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+982, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+984, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+984, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+986, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+986, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+988, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+988, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+990, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+990, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+992, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+992, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+994, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+994, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+996, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+996, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+998, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+998, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_24:
+	RETURN
+; end of _Draw_24
+
+_Draw_25:
+
+;dsPIC_VGA.c,120 :: 		DEFINE_DRAW(25)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+1000, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1000, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1002, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1002, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1004, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1004, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1006, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1006, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1008, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1008, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1010, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1010, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1012, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1012, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1014, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1014, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1016, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1016, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1018, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1018, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1020, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1020, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1022, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1022, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1024, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1024, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1026, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1026, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1028, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1028, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1030, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1030, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1032, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1032, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1034, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1034, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1036, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1036, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1038, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1038, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_25:
+	RETURN
+; end of _Draw_25
+
+_Draw_26:
+
+;dsPIC_VGA.c,121 :: 		DEFINE_DRAW(26)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+1040, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1040, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1042, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1042, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1044, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1044, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1046, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1046, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1048, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1048, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1050, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1050, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1052, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1052, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1054, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1054, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1056, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1056, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1058, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1058, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1060, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1060, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1062, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1062, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1064, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1064, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1066, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1066, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1068, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1068, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1070, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1070, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1072, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1072, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1074, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1074, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1076, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1076, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1078, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1078, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_26:
+	RETURN
+; end of _Draw_26
+
+_Draw_27:
+
+;dsPIC_VGA.c,122 :: 		DEFINE_DRAW(27)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+1080, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1080, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1082, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1082, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1084, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1084, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1086, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1086, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1088, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1088, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1090, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1090, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1092, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1092, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1094, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1094, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1096, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1096, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1098, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1098, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1100, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1100, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1102, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1102, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1104, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1104, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1106, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1106, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1108, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1108, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1110, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1110, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1112, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1112, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1114, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1114, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1116, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1116, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1118, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1118, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_27:
+	RETURN
+; end of _Draw_27
+
+_Draw_28:
+
+;dsPIC_VGA.c,123 :: 		DEFINE_DRAW(28)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+1120, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1120, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1122, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1122, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1124, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1124, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1126, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1126, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1128, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1128, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1130, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1130, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1132, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1132, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1134, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1134, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1136, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1136, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1138, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1138, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1140, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1140, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1142, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1142, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1144, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1144, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1146, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1146, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1148, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1148, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1150, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1150, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1152, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1152, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1154, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1154, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1156, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1156, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1158, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1158, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_28:
+	RETURN
+; end of _Draw_28
+
+_Draw_29:
+
+;dsPIC_VGA.c,124 :: 		DEFINE_DRAW(29)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV	_matrix+1160, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1160, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1162, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1162, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1164, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1164, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1166, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1166, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1168, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1168, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1170, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1170, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1172, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1172, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1174, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1174, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1176, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1176, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1178, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1178, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1180, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1180, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1182, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1182, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1184, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1184, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1186, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1186, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1188, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1188, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1190, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1190, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1192, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1192, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1194, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1194, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1196, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1196, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	MOV	_matrix+1198, W0
+	MOV	WREG, LATD
+	NOP
+	MOV	_matrix+1198, W0
+	LSR	W0, #8, W0
+	MOV	WREG, LATD
+	NOP
+	NOP
+	NOP
+	NOP
+	CLR	LATD
+	MOV	#1, W1
+	MOV	#lo_addr(_current_vertical_line), W0
+	ADD	W1, [W0], [W0]
+	NOP
+L_end_Draw_29:
+	RETURN
+; end of _Draw_29
 
 _NullDraw:
 
-;dsPIC_VGA.c,194 :: 		void NullDraw() {
-;dsPIC_VGA.c,196 :: 		REP(0, 1, 5, NOP)
+;dsPIC_VGA.c,126 :: 		void NullDraw() {
+;dsPIC_VGA.c,128 :: 		REP(0, 1, 5, NOP)
 	NOP
 	NOP
 	NOP
@@ -315,7 +5653,7 @@ _NullDraw:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,199 :: 		REP(1, 6, 0, NOP)
+;dsPIC_VGA.c,131 :: 		REP(1, 6, 0, NOP)
 	NOP
 	NOP
 	NOP
@@ -476,22 +5814,22 @@ _NullDraw:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,202 :: 		VGA_COLOR = 0; REP(0, 0, 5, NOP);
+;dsPIC_VGA.c,134 :: 		VGA_COLOR = 0; REP(0, 0, 5, NOP);
 	CLR	LATD
 	NOP
 	NOP
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,203 :: 		}
+;dsPIC_VGA.c,135 :: 		}
 L_end_NullDraw:
 	RETURN
 ; end of _NullDraw
 
 _NullDraw_less_2_final_cycle:
 
-;dsPIC_VGA.c,205 :: 		void NullDraw_less_2_final_cycle() {
-;dsPIC_VGA.c,207 :: 		REP(0, 1, 5, NOP)
+;dsPIC_VGA.c,137 :: 		void NullDraw_less_2_final_cycle() {
+;dsPIC_VGA.c,139 :: 		REP(0, 1, 5, NOP)
 	NOP
 	NOP
 	NOP
@@ -507,7 +5845,7 @@ _NullDraw_less_2_final_cycle:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,210 :: 		REP(1, 6, 0, NOP)
+;dsPIC_VGA.c,142 :: 		REP(1, 6, 0, NOP)
 	NOP
 	NOP
 	NOP
@@ -668,20 +6006,20 @@ _NullDraw_less_2_final_cycle:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,213 :: 		VGA_COLOR = 0; current_vertical_line = 0; REP(0, 0, 1, NOP)
+;dsPIC_VGA.c,145 :: 		VGA_COLOR = 0; current_vertical_line = 0; REP(0, 0, 1, NOP)
 	CLR	LATD
 	CLR	W0
 	MOV	W0, _current_vertical_line
 	NOP
-;dsPIC_VGA.c,214 :: 		}
+;dsPIC_VGA.c,146 :: 		}
 L_end_NullDraw_less_2_final_cycle:
 	RETURN
 ; end of _NullDraw_less_2_final_cycle
 
 _HSync_nops:
 
-;dsPIC_VGA.c,216 :: 		void HSync_nops() {
-;dsPIC_VGA.c,217 :: 		REP(0, 1, 9, NOP)
+;dsPIC_VGA.c,148 :: 		void HSync_nops() {
+;dsPIC_VGA.c,149 :: 		REP(0, 1, 9, NOP)
 	NOP
 	NOP
 	NOP
@@ -701,7 +6039,7 @@ _HSync_nops:
 	NOP
 	NOP
 	NOP
-;dsPIC_VGA.c,218 :: 		}
+;dsPIC_VGA.c,150 :: 		}
 L_end_HSync_nops:
 	RETURN
 ; end of _HSync_nops
@@ -715,36 +6053,36 @@ _main:
 	MOV	#4, W0
 	IOR	68
 
-;dsPIC_VGA.c,222 :: 		int main()
-;dsPIC_VGA.c,224 :: 		config();
+;dsPIC_VGA.c,154 :: 		int main()
+;dsPIC_VGA.c,156 :: 		config();
 	CALL	_config
-;dsPIC_VGA.c,226 :: 		while(1) {
+;dsPIC_VGA.c,158 :: 		while(1) {
 L_main0:
-;dsPIC_VGA.c,228 :: 		vsync_on;
+;dsPIC_VGA.c,160 :: 		vsync_on;
 	BCLR.B	LATEbits, #2
-;dsPIC_VGA.c,229 :: 		HSYNC_NOPS NullDraw();
+;dsPIC_VGA.c,161 :: 		HSYNC_NOPS NullDraw();
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw
-;dsPIC_VGA.c,230 :: 		HSYNC_NOPS NullDraw();
+;dsPIC_VGA.c,162 :: 		HSYNC_NOPS NullDraw();
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw
-;dsPIC_VGA.c,231 :: 		HSYNC_NOPS NullDraw();
+;dsPIC_VGA.c,163 :: 		HSYNC_NOPS NullDraw();
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw
-;dsPIC_VGA.c,232 :: 		HSYNC_NOPS NullDraw();
+;dsPIC_VGA.c,164 :: 		HSYNC_NOPS NullDraw();
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw
-;dsPIC_VGA.c,233 :: 		vsync_off;
+;dsPIC_VGA.c,165 :: 		vsync_off;
 	BSET.B	LATEbits, #2
-;dsPIC_VGA.c,236 :: 		REP(0, 2, 3, HSYNC_NOPS NullDraw();)
+;dsPIC_VGA.c,168 :: 		REP(0, 2, 3, HSYNC_NOPS NullDraw();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
@@ -837,2415 +6175,2444 @@ L_main0:
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw
-;dsPIC_VGA.c,239 :: 		REP(6, 0, 0, HSYNC_NOPS Draw();)
+;dsPIC_VGA.c,171 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_0();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_0
+;dsPIC_VGA.c,172 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_1();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_1
+;dsPIC_VGA.c,173 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_2();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_2
+;dsPIC_VGA.c,174 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_3();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_3
+;dsPIC_VGA.c,175 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_4();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_4
+;dsPIC_VGA.c,176 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_5();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_5
+;dsPIC_VGA.c,177 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_6();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_6
+;dsPIC_VGA.c,178 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_7();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_7
+;dsPIC_VGA.c,179 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_8();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_8
+;dsPIC_VGA.c,180 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_9();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_9
+;dsPIC_VGA.c,181 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_10();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_10
+;dsPIC_VGA.c,182 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_11();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_11
+;dsPIC_VGA.c,183 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_12();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_12
+;dsPIC_VGA.c,184 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_13();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_13
+;dsPIC_VGA.c,185 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_14();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_14
+;dsPIC_VGA.c,186 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_15();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_15
+;dsPIC_VGA.c,187 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_16();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_16
+;dsPIC_VGA.c,188 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_17();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_17
+;dsPIC_VGA.c,189 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_18();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_18
+;dsPIC_VGA.c,190 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_19();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_19
+;dsPIC_VGA.c,191 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_20();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_20
+;dsPIC_VGA.c,192 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_21();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_21
+;dsPIC_VGA.c,193 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_22();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_22
+;dsPIC_VGA.c,194 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_23();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_23
+;dsPIC_VGA.c,195 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_24();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_24
+;dsPIC_VGA.c,196 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_25();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_25
+;dsPIC_VGA.c,197 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_26();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_26
+;dsPIC_VGA.c,198 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_27();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_27
+;dsPIC_VGA.c,199 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_28();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_28
+;dsPIC_VGA.c,200 :: 		REP(0, 2, 0, HSYNC_NOPS Draw_29();)
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
+	CALL	_Draw_29
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
-	CALL	_Draw
-;dsPIC_VGA.c,242 :: 		HSYNC_NOPS NullDraw_less_2_final_cycle();
+	CALL	_Draw_29
+;dsPIC_VGA.c,204 :: 		HSYNC_NOPS NullDraw_less_2_final_cycle();
 	BCLR.B	LATEbits, #1
 	CALL	_HSync_nops
 	BSET.B	LATEbits, #1
 	CALL	_NullDraw_less_2_final_cycle
-;dsPIC_VGA.c,243 :: 		}
+;dsPIC_VGA.c,205 :: 		}
 	GOTO	L_main0
-;dsPIC_VGA.c,244 :: 		}
+;dsPIC_VGA.c,206 :: 		}
 L_end_main:
 L__main_end_loop:
 	BRA	L__main_end_loop
