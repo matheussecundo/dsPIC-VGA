@@ -10,8 +10,8 @@
 #define VGA_R LATDbits.LATD0
 #define VGA_G LATDbits.LATD1
 #define VGA_B LATDbits.LATD2
-#define VGA_HSync LATEbits.LATE1
-#define VGA_VSync LATEbits.LATE2
+#define VGA_HSync LATFbits.LATF0
+#define VGA_VSync LATFbits.LATF1
 
 #define clear_color VGA_COLOR = 0
 #define hsync_off VGA_HSync = 1
@@ -19,14 +19,13 @@
 #define vsync_off VGA_VSync = 1
 #define vsync_on VGA_VSync = 0
 
-#define SECONDS_TO_UPDATE 0.5
+#define SECONDS_TO_UPDATE 0.2
 
 const unsigned int update_frame = (VGA_VERTICAL_LINES * VGA_FRAMES_PER_SECOND * SECONDS_TO_UPDATE);
 
 unsigned int current_vertical_line = 0; // current line for render
 
 #include "macros.h"
-
 #include "utils.h"
 
 #define MATRIX_LINES 30
@@ -38,14 +37,16 @@ unsigned int current_vertical_line = 0; // current line for render
 void config()
 {
 	ADPCFG = 0xFFFF;
-	PORTB=0;
-	PORTC=0;
-	PORTD=0;
-	PORTE=0;
 
-	TRISE = 0;
-	TRISD = 0;
+	PORTB=0;
+	PORTD=0;
+	// PORTE=0;
+	PORTF=0;
+
 	TRISB = 0xf;
+	TRISD = 0;
+	// TRISE = 0;
+	TRISF = 0;
 }
 
 #define DEFINE_DRAW(LINE)\
@@ -155,6 +156,7 @@ void snakeInit() {
 
 	snake.apple_pos = &matrix[5 * MATRIX_COLUMNS + 19];
 	*snake.apple_pos = 5;
+	snake.apple_qtd = 0;
 	snake.ipos = &matrix[20 * MATRIX_COLUMNS + 19];
 	snake.fpos = &matrix[21 * MATRIX_COLUMNS + 19];
 	*snake.ipos = 0b10010001;
@@ -243,15 +245,11 @@ void SNAKE_NullDraw_less_2_final_cycle() {
 
 			snake.fpos = snake.fpos + snake.fdiry * MATRIX_COLUMNS + snake.fdirx;
 
-			// *snake.fpos = (snake.fdir << 4) | 1;
-
 		} else {
 
 			REP(0,0,3, NOP)
 
 			REP(0,1,0, NOP)
-
-			// REP(0,0,6, NOP)
 
 		}
 		////////////////////////////////////
@@ -270,6 +268,7 @@ void SNAKE_NullDraw_less_2_final_cycle() {
 			}
 			snake.apple_pos = &matrix[index];
 			*snake.apple_pos = 5;
+			snake.apple_qtd++;
 		}
 		REP(1, 5, 0, NOP)
 	}

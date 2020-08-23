@@ -10,4 +10,5 @@ struct SNAKE {
     short fdirx;
     short fdiry;
     unsigned short * apple_pos;
+    unsigned int apple_qtd;
 } snake;

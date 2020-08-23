@@ -25,14 +25,3 @@ sbit LCD_D7_Direction at TRISE5_bit;
 #define LCD_CURSOR_OFF() Lcd_Cmd(_LCD_CURSOR_OFF)
 #define LCD_SHIFT_LEFT() Lcd_Cmd(_LCD_SHIFT_LEFT)
 #define LCD_SHIFT_RIGHT() Lcd_Cmd(_LCD_SHIFT_RIGHT)
-
-void LCD_WRITE_DEBUG(const unsigned char *str)
-{
-    unsigned int len;
-    len = strlen(str);
-    if(len > 32) len = 32;
-    
-    LCD_CLEAR();
-    LCD_OUT(str, 1, 1);
-	if (len > 16) LCD_OUT(str + 16, 2, 1);
-}
