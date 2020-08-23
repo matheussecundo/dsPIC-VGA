@@ -36,3 +36,6 @@ main
 	Draw_29
 	SNAKE_NullDraw_less_2_final_cycle
 		snakeInit
+		rand
+			srand
+			_Multiply_32x32

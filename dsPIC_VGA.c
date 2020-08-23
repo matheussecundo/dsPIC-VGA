@@ -1,10 +1,10 @@
-#define FCY 10000000
 // 8 MHz x 1 PLL  / 4 = 2 MIPS
 // 8 MHz x 4 PLL  / 4 = 8 MIPS
 // 8 MHz x 8 PLL  / 4 = 16 MIPS
 // 8 MHz x 16 PLL / 4 = 32 MIPS
 
 #define VGA_VERTICAL_LINES 600
+#define VGA_FRAMES_PER_SECOND 60
 
 #define VGA_COLOR LATD
 #define VGA_R LATDbits.LATD0
@@ -19,6 +19,10 @@
 #define vsync_off VGA_VSync = 1
 #define vsync_on VGA_VSync = 0
 
+#define SECONDS_TO_UPDATE 0.5
+
+const unsigned int update_frame = (VGA_VERTICAL_LINES * VGA_FRAMES_PER_SECOND * SECONDS_TO_UPDATE);
+
 unsigned int current_vertical_line = 0; // current line for render
 
 #include "macros.h"
@@ -27,6 +31,7 @@ unsigned int current_vertical_line = 0; // current line for render
 
 #define MATRIX_LINES 30
 #define MATRIX_COLUMNS 40
+#define MATRIX_SIZE (MATRIX_LINES * MATRIX_COLUMNS)
 
 #include "matrix.h"
 
@@ -148,8 +153,10 @@ void HSync_nops() {
 void snakeInit() {
 	copy(matrix_default, matrix, MATRIX_LINES * MATRIX_COLUMNS);
 
-	snake.ipos = &matrix[14 * MATRIX_COLUMNS + 19];
-	snake.fpos = &matrix[15 * MATRIX_COLUMNS + 19];
+	snake.apple_pos = &matrix[5 * MATRIX_COLUMNS + 19];
+	*snake.apple_pos = 5;
+	snake.ipos = &matrix[20 * MATRIX_COLUMNS + 19];
+	snake.fpos = &matrix[21 * MATRIX_COLUMNS + 19];
 	*snake.ipos = 0b10010001;
 	*snake.fpos = 0b10010001;
 	snake.idir = 0b1001;
@@ -165,7 +172,7 @@ void SNAKE_NullDraw_less_2_final_cycle() {
 	REP(0, 1, 5, NOP)
 
 	// 800 / 5 = 160 cycles /////////////////////////
-	if (current_vertical_line >= 36000) {
+	if (current_vertical_line >= update_frame) {
 
 		// 46 cycles ////////////////////////
 		if (PORTBbits.RB0 && snake.idirx != 1) {
@@ -255,7 +262,16 @@ void SNAKE_NullDraw_less_2_final_cycle() {
 
 		REP(0, 4, 5, NOP)
 	} else {
-		REP(1, 5, 5, NOP)
+		if (*snake.apple_pos != 5) {
+			int index = rand() % MATRIX_SIZE;
+			while (matrix[index] != 0)
+			{
+				index = rand() % MATRIX_SIZE;
+			}
+			snake.apple_pos = &matrix[index];
+			*snake.apple_pos = 5;
+		}
+		REP(1, 5, 0, NOP)
 	}
 	/////////////////////////////////////////////////
 

@@ -703,6 +703,7 @@ altivt_bit
 alts
 alts
 alts_bit
+apple_pos
 asam
 asam
 asam_bit
@@ -7319,6 +7320,7 @@ udis
 udis_bit
 uldiv
 unused
+update_frame
 updn
 updn
 updn_bit

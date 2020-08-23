@@ -9,4 +9,5 @@ struct SNAKE {
     short fdir;
     short fdirx;
     short fdiry;
+    unsigned short * apple_pos;
 } snake;
