@@ -3,6 +3,10 @@ main
 	snakeInit
 		copy
 	HSync_nops
+	NullDraw0
+	NullDraw1
+	NullDraw2
+	NullDraw3
 	NullDraw
 	Draw_0
 	Draw_1

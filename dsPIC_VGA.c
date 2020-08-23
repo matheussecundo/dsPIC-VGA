@@ -148,8 +148,107 @@ void HSync_nops() {
 
 #define HSYNC_NOPS hsync_on; HSync_nops(); hsync_off;
 
-
+#include "numbers.h"
 #include "snake.h"
+
+unsigned short number = 0;
+unsigned int start = 0;
+
+void NullDraw0() {
+	// 88 / 5 = 17.6 cycles
+	REP(0, 1, 5, NOP)
+
+	// 800 / 5 = 160 cycles /////////
+	number = snake.apple_qtd & 0x00f;
+	*&matrix[1026 + 0 * MATRIX_COLUMNS + 0] = numbers[number][0];
+	*&matrix[1026 + 0 * MATRIX_COLUMNS + 1] = numbers[number][1];
+	*&matrix[1026 + 0 * MATRIX_COLUMNS + 2] = numbers[number][2];
+	*&matrix[1026 + 1 * MATRIX_COLUMNS + 0] = numbers[number][3];
+	*&matrix[1026 + 1 * MATRIX_COLUMNS + 1] = numbers[number][4];
+	*&matrix[1026 + 1 * MATRIX_COLUMNS + 2] = numbers[number][5];
+	*&matrix[1026 + 2 * MATRIX_COLUMNS + 0] = numbers[number][6];
+	*&matrix[1026 + 2 * MATRIX_COLUMNS + 1] = numbers[number][7];
+	*&matrix[1026 + 2 * MATRIX_COLUMNS + 2] = numbers[number][8];
+	*&matrix[1026 + 3 * MATRIX_COLUMNS + 0] = numbers[number][9];
+	*&matrix[1026 + 3 * MATRIX_COLUMNS + 1] = numbers[number][10];
+	*&matrix[1026 + 3 * MATRIX_COLUMNS + 2] = numbers[number][11];
+	*&matrix[1026 + 4 * MATRIX_COLUMNS + 0] = numbers[number][12];
+	*&matrix[1026 + 4 * MATRIX_COLUMNS + 1] = numbers[number][13];
+	*&matrix[1026 + 4 * MATRIX_COLUMNS + 2] = numbers[number][14];
+	REP(0, 6, 2, NOP)
+	/////////////////////////////////
+
+	// 40 / 5 = 8 cycles
+	VGA_COLOR = 0; REP(0, 0, 5, NOP);
+}
+
+void NullDraw1() {
+	// 88 / 5 = 17.6 cycles
+	REP(0, 1, 5, NOP)
+
+	// 800 / 5 = 160 cycles /////////
+	number = (snake.apple_qtd & 0x0f0) >> 4;
+	*&matrix[1022 + 0 * MATRIX_COLUMNS + 0] = numbers[number][0];
+	*&matrix[1022 + 0 * MATRIX_COLUMNS + 1] = numbers[number][1];
+	*&matrix[1022 + 0 * MATRIX_COLUMNS + 2] = numbers[number][2];
+	*&matrix[1022 + 1 * MATRIX_COLUMNS + 0] = numbers[number][3];
+	*&matrix[1022 + 1 * MATRIX_COLUMNS + 1] = numbers[number][4];
+	*&matrix[1022 + 1 * MATRIX_COLUMNS + 2] = numbers[number][5];
+	*&matrix[1022 + 2 * MATRIX_COLUMNS + 0] = numbers[number][6];
+	*&matrix[1022 + 2 * MATRIX_COLUMNS + 1] = numbers[number][7];
+	*&matrix[1022 + 2 * MATRIX_COLUMNS + 2] = numbers[number][8];
+	*&matrix[1022 + 3 * MATRIX_COLUMNS + 0] = numbers[number][9];
+	*&matrix[1022 + 3 * MATRIX_COLUMNS + 1] = numbers[number][10];
+	*&matrix[1022 + 3 * MATRIX_COLUMNS + 2] = numbers[number][11];
+	*&matrix[1022 + 4 * MATRIX_COLUMNS + 0] = numbers[number][12];
+	*&matrix[1022 + 4 * MATRIX_COLUMNS + 1] = numbers[number][13];
+	*&matrix[1022 + 4 * MATRIX_COLUMNS + 2] = numbers[number][14];
+	REP(0, 6, 0, NOP)
+	/////////////////////////////////
+
+	// 40 / 5 = 8 cycles
+	VGA_COLOR = 0; REP(0, 0, 5, NOP);
+}
+
+void NullDraw2() {
+	// 88 / 5 = 17.6 cycles
+	REP(0, 1, 5, NOP)
+
+	// 800 / 5 = 160 cycles /////////
+	number = snake.apple_qtd >> 8;
+	*&matrix[1018 + 0 * MATRIX_COLUMNS + 0] = numbers[number][0];
+	*&matrix[1018 + 0 * MATRIX_COLUMNS + 1] = numbers[number][1];
+	*&matrix[1018 + 0 * MATRIX_COLUMNS + 2] = numbers[number][2];
+	*&matrix[1018 + 1 * MATRIX_COLUMNS + 0] = numbers[number][3];
+	*&matrix[1018 + 1 * MATRIX_COLUMNS + 1] = numbers[number][4];
+	*&matrix[1018 + 1 * MATRIX_COLUMNS + 2] = numbers[number][5];
+	*&matrix[1018 + 2 * MATRIX_COLUMNS + 0] = numbers[number][6];
+	*&matrix[1018 + 2 * MATRIX_COLUMNS + 1] = numbers[number][7];
+	*&matrix[1018 + 2 * MATRIX_COLUMNS + 2] = numbers[number][8];
+	*&matrix[1018 + 3 * MATRIX_COLUMNS + 0] = numbers[number][9];
+	*&matrix[1018 + 3 * MATRIX_COLUMNS + 1] = numbers[number][10];
+	*&matrix[1018 + 3 * MATRIX_COLUMNS + 2] = numbers[number][11];
+	*&matrix[1018 + 4 * MATRIX_COLUMNS + 0] = numbers[number][12];
+	*&matrix[1018 + 4 * MATRIX_COLUMNS + 1] = numbers[number][13];
+	*&matrix[1018 + 4 * MATRIX_COLUMNS + 2] = numbers[number][14];
+	REP(0, 6, 2, NOP)
+	/////////////////////////////////
+
+	// 40 / 5 = 8 cycles
+	VGA_COLOR = 0; REP(0, 0, 5, NOP);
+}
+
+void NullDraw3() {
+	// 88 / 5 = 17.6 cycles
+	REP(0, 1, 5, NOP)
+
+	// 800 / 5 = 160 cycles
+	start = start | PORTB;
+	REP(1, 5, 6, NOP)
+
+	// 40 / 5 = 8 cycles
+	VGA_COLOR = 0; REP(0, 0, 5, NOP);
+}
 
 void snakeInit() {
 	copy(matrix_default, matrix, MATRIX_LINES * MATRIX_COLUMNS);
@@ -167,110 +266,121 @@ void snakeInit() {
 	snake.fdir = 0b1001;
 	snake.fdirx = 0;
 	snake.fdiry = -1;
+
+	start = 0;
 }
 
 void SNAKE_NullDraw_less_2_final_cycle() {
-	// 88 / 5 = 17.6 cycles
+	// 88 / 5 = 17.6 cycles /////////////////////////
 	REP(0, 1, 5, NOP)
+	/////////////////////////////////////////////////
 
 	// 800 / 5 = 160 cycles /////////////////////////
-	if (current_vertical_line >= update_frame) {
+	if (start != 0) {
 
-		// 46 cycles ////////////////////////
-		if (PORTBbits.RB0 && snake.idirx != 1) {
-			snake.idir = 0b0110;
-			snake.idirx = -1;
-			snake.idiry = 0;
-			*snake.ipos = (*snake.ipos & 0xf) | 0b01100000;
-			REP(0,2,7, NOP)
-		} else if (PORTBbits.RB1 && snake.idiry != 1) {
-			snake.idir = 0b1001;
-			snake.idirx = 0;
-			snake.idiry = -1;
-			*snake.ipos = (*snake.ipos & 0xf) | 0b10010000;
-			REP(0,2,0, NOP)
-		} else if (PORTBbits.RB2 && snake.idirx != -1) {
-			snake.idir = 0b1110;
-			snake.idirx = 1;
-			snake.idiry = 0;
-			*snake.ipos = (*snake.ipos & 0xf) | 0b11100000;
-			REP(0,1,3, NOP)
-		} else if (PORTBbits.RB3 && snake.idiry != -1) {
-			snake.idir = 0b1011;
-			snake.idirx = 0;
-			snake.idiry = 1;
-			*snake.ipos = (*snake.ipos & 0xf) | 0b10110000;
-			REP(0,0,6, NOP)
-		} else {
-			snake.idir = (*snake.ipos) >> 4;
-			snake.idirx = (snake.idir >> 2) - 2;
-			snake.idiry = (snake.idir & 0x3) - 2;
-		}
-		////////////////////////////////////
+		if (current_vertical_line >= update_frame) {
 
-		// 18 cycles ///////////////////////
-		snake.fdir = (*snake.fpos) >> 4;
-		snake.fdirx = (snake.fdir >> 2) - 2;
-		snake.fdiry = (snake.fdir & 0x3) - 2;
-		////////////////////////////////////
-
-		// 2 cycles ////////////////////////
-		current_vertical_line = 0;
-		////////////////////////////////////
-
-		// 10 cycles ///////////////////////
-		snake.ipos = snake.ipos + snake.idiry * MATRIX_COLUMNS + snake.idirx;
-		////////////////////////////////////
-
-		// 5 cycles ///////////////////////
-		if ((*snake.ipos & 0x7) == 1) {
-
-			snakeInit();
-
-		}
-		////////////////////////////////////
-
-		// 5 cycles ///////////////////////
-		if (*snake.ipos == 7) {
-
-			snakeInit();
-
-		}
-		////////////////////////////////////
-
-		// 24 cycles ///////////////////////
-		if (*snake.ipos == 0) {
-
-			*snake.fpos = 0;
-
-			snake.fpos = snake.fpos + snake.fdiry * MATRIX_COLUMNS + snake.fdirx;
-
-		} else {
-
-			REP(0,0,3, NOP)
-
-			REP(0,1,0, NOP)
-
-		}
-		////////////////////////////////////
-		
-		// 6 cycles ////////////////////////
-		*snake.ipos = (snake.idir << 4) | 1;
-		////////////////////////////////////
-
-		REP(0, 4, 5, NOP)
-	} else {
-		if (*snake.apple_pos != 5) {
-			int index = rand() % MATRIX_SIZE;
-			while (matrix[index] != 0)
-			{
-				index = rand() % MATRIX_SIZE;
+			// 46 cycles ////////////////////////
+			if (PORTBbits.RB0 && snake.idirx != 1) {
+				snake.idir = 0b0110;
+				snake.idirx = -1;
+				snake.idiry = 0;
+				*snake.ipos = (*snake.ipos & 0xf) | 0b01100000;
+				REP(0,2,7, NOP)
+			} else if (PORTBbits.RB1 && snake.idiry != 1) {
+				snake.idir = 0b1001;
+				snake.idirx = 0;
+				snake.idiry = -1;
+				*snake.ipos = (*snake.ipos & 0xf) | 0b10010000;
+				REP(0,2,0, NOP)
+			} else if (PORTBbits.RB2 && snake.idirx != -1) {
+				snake.idir = 0b1110;
+				snake.idirx = 1;
+				snake.idiry = 0;
+				*snake.ipos = (*snake.ipos & 0xf) | 0b11100000;
+				REP(0,1,3, NOP)
+			} else if (PORTBbits.RB3 && snake.idiry != -1) {
+				snake.idir = 0b1011;
+				snake.idirx = 0;
+				snake.idiry = 1;
+				*snake.ipos = (*snake.ipos & 0xf) | 0b10110000;
+				REP(0,0,6, NOP)
+			} else {
+				snake.idir = (*snake.ipos) >> 4;
+				snake.idirx = (snake.idir >> 2) - 2;
+				snake.idiry = (snake.idir & 0x3) - 2;
 			}
-			snake.apple_pos = &matrix[index];
-			*snake.apple_pos = 5;
-			snake.apple_qtd++;
+			////////////////////////////////////
+
+			// 18 cycles ///////////////////////
+			snake.fdir = (*snake.fpos) >> 4;
+			snake.fdirx = (snake.fdir >> 2) - 2;
+			snake.fdiry = (snake.fdir & 0x3) - 2;
+			////////////////////////////////////
+
+			// 2 cycles ////////////////////////
+			current_vertical_line = 0;
+			////////////////////////////////////
+
+			// 10 cycles ///////////////////////
+			snake.ipos = snake.ipos + snake.idiry * MATRIX_COLUMNS + snake.idirx;
+			////////////////////////////////////
+
+			// 5 cycles ///////////////////////
+			if ((*snake.ipos & 0x7) == 1) {
+
+				snakeInit();
+
+			}
+			////////////////////////////////////
+
+			// 5 cycles ///////////////////////
+			if (*snake.ipos == 7) {
+
+				snakeInit();
+
+			}
+			////////////////////////////////////
+
+			// 24 cycles ///////////////////////
+			if (*snake.ipos == 0) {
+
+				*snake.fpos = 0;
+
+				snake.fpos = snake.fpos + snake.fdiry * MATRIX_COLUMNS + snake.fdirx;
+
+			} else {
+
+				REP(0,0,3, NOP)
+
+				REP(0,1,0, NOP)
+
+			}
+			////////////////////////////////////
+			
+			// 6 cycles ////////////////////////
+			*snake.ipos = (snake.idir << 4) | 1;
+			////////////////////////////////////
+
+			REP(0, 4, 5, NOP)
+		} else {
+			if (*snake.apple_pos != 5) {
+				int index = rand() % (MATRIX_SIZE - 200);
+				while (matrix[index] != 0)
+				{
+					index = rand() % (MATRIX_SIZE - 200);
+				}
+				snake.apple_pos = &matrix[index];
+				*snake.apple_pos = 5;
+				snake.apple_qtd++;
+			}
+			REP(1, 5, 0, NOP)
 		}
-		REP(1, 5, 0, NOP)
+
+	} else {
+
+		REP(1,5,5, NOP)
+
 	}
 	/////////////////////////////////////////////////
 
@@ -286,10 +396,10 @@ int main()
 	while(1) {
 		//4 = 0.1056 ms
 		vsync_on;
-		HSYNC_NOPS NullDraw();
-		HSYNC_NOPS NullDraw();
-		HSYNC_NOPS NullDraw();
-		HSYNC_NOPS NullDraw();
+		HSYNC_NOPS NullDraw0();
+		HSYNC_NOPS NullDraw1();
+		HSYNC_NOPS NullDraw2();
+		HSYNC_NOPS NullDraw3();
 		vsync_off;
 
 		//23 = 0.6072 ms

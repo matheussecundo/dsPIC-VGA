@@ -3199,6 +3199,12 @@ nstdis
 nstdis
 nstdis_bit
 nulldraw
+nulldraw0
+nulldraw1
+nulldraw2
+nulldraw3
+number
+numbers
 nvmadr
 nvmadr
 nvmadr_0
@@ -5434,6 +5440,7 @@ ssrc_2_bit
 ssrc0
 ssrc1
 ssrc2
+start
 stkerr
 stkerr
 stkerr_bit

@@ -93,12 +93,12 @@ const unsigned short matrix_default[ 30  *  40 ] =
  7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
  7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
  7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
- 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
- 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
- 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
- 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
- 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
- 7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+ 7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+ 4,4,4,0,0,4,0,0,4,4,4,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+ 4,0,0,0,0,4,0,0,0,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+ 4,4,4,0,0,4,0,0,0,4,0,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+ 0,0,4,0,0,4,0,0,4,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+ 4,4,4,0,0,4,0,0,4,4,4,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 };
 
 unsigned short matrix[ 30  *  40 ];
@@ -163,6 +163,124 @@ void NullDraw() {
 void HSync_nops() {
      asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
 }
+#line 1 "c:/git/dspic-vga/numbers.h"
+
+
+const unsigned short numbers[16][15] =
+{
+ {
+  6 , 6 , 6 ,
+  6 ,0, 6 ,
+  6 ,0, 6 ,
+  6 ,0, 6 ,
+  6 , 6 , 6 
+ },
+ {
+  6 , 6 ,0,
+ 0, 6 ,0,
+ 0, 6 ,0,
+ 0, 6 ,0,
+ 0, 6 ,0
+ },
+ {
+  6 , 6 , 6 ,
+ 0,0, 6 ,
+  6 , 6 , 6 ,
+  6 ,0,0,
+  6 , 6 , 6 
+ },
+ {
+  6 , 6 , 6 ,
+ 0,0, 6 ,
+  6 , 6 , 6 ,
+ 0,0, 6 ,
+  6 , 6 , 6 
+ },
+ {
+  6 ,0, 6 ,
+  6 ,0, 6 ,
+  6 , 6 , 6 ,
+ 0,0, 6 ,
+ 0,0, 6 
+ },
+ {
+  6 , 6 , 6 ,
+  6 ,0,0,
+  6 , 6 , 6 ,
+ 0,0, 6 ,
+  6 , 6 , 6 
+ },
+ {
+  6 , 6 , 6 ,
+  6 ,0,0,
+  6 , 6 , 6 ,
+  6 ,0, 6 ,
+  6 , 6 , 6 
+ },
+ {
+  6 , 6 , 6 ,
+  6 ,0, 6 ,
+ 0,0, 6 ,
+ 0,0, 6 ,
+ 0,0, 6 
+ },
+ {
+  6 , 6 , 6 ,
+  6 ,0, 6 ,
+  6 , 6 , 6 ,
+  6 ,0, 6 ,
+  6 , 6 , 6 
+ },
+ {
+  6 , 6 , 6 ,
+  6 ,0, 6 ,
+  6 , 6 , 6 ,
+ 0,0, 6 ,
+  6 , 6 , 6 
+ },
+ {
+  6 , 6 , 6 ,
+  6 ,0, 6 ,
+  6 , 6 , 6 ,
+  6 ,0, 6 ,
+  6 ,0, 6 
+ },
+ {
+  6 ,0,0,
+  6 ,0,0,
+  6 , 6 , 6 ,
+  6 ,0, 6 ,
+  6 , 6 , 6 
+ },
+ {
+  6 , 6 , 6 ,
+  6 ,0,0,
+  6 ,0,0,
+  6 ,0,0,
+  6 , 6 , 6 
+ },
+ {
+ 0,0, 6 ,
+ 0,0, 6 ,
+  6 , 6 , 6 ,
+  6 ,0, 6 ,
+  6 , 6 , 6 
+ },
+ {
+  6 , 6 , 6 ,
+  6 ,0,0,
+  6 , 6 , 6 ,
+  6 ,0,0,
+  6 , 6 , 6 
+ },
+ {
+  6 , 6 , 6 ,
+  6 ,0,0,
+  6 , 6 , 6 ,
+  6 ,0,0,
+  6 ,0,0
+ }
+};
 #line 1 "c:/git/dspic-vga/snake.h"
 
 
@@ -179,6 +297,105 @@ struct SNAKE {
  unsigned int apple_qtd;
 } snake;
 #line 154 "C:/Git/dsPIC-VGA/dsPIC_VGA.c"
+unsigned short number = 0;
+unsigned int start = 0;
+
+void NullDraw0() {
+
+     asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+
+
+ number = snake.apple_qtd & 0x00f;
+ *&matrix[1026 + 0 *  40  + 0] = numbers[number][0];
+ *&matrix[1026 + 0 *  40  + 1] = numbers[number][1];
+ *&matrix[1026 + 0 *  40  + 2] = numbers[number][2];
+ *&matrix[1026 + 1 *  40  + 0] = numbers[number][3];
+ *&matrix[1026 + 1 *  40  + 1] = numbers[number][4];
+ *&matrix[1026 + 1 *  40  + 2] = numbers[number][5];
+ *&matrix[1026 + 2 *  40  + 0] = numbers[number][6];
+ *&matrix[1026 + 2 *  40  + 1] = numbers[number][7];
+ *&matrix[1026 + 2 *  40  + 2] = numbers[number][8];
+ *&matrix[1026 + 3 *  40  + 0] = numbers[number][9];
+ *&matrix[1026 + 3 *  40  + 1] = numbers[number][10];
+ *&matrix[1026 + 3 *  40  + 2] = numbers[number][11];
+ *&matrix[1026 + 4 *  40  + 0] = numbers[number][12];
+ *&matrix[1026 + 4 *  40  + 1] = numbers[number][13];
+ *&matrix[1026 + 4 *  40  + 2] = numbers[number][14];
+     asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;} 
+
+
+
+  LATD  = 0;       asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} ;
+}
+
+void NullDraw1() {
+
+     asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+
+
+ number = (snake.apple_qtd & 0x0f0) >> 4;
+ *&matrix[1022 + 0 *  40  + 0] = numbers[number][0];
+ *&matrix[1022 + 0 *  40  + 1] = numbers[number][1];
+ *&matrix[1022 + 0 *  40  + 2] = numbers[number][2];
+ *&matrix[1022 + 1 *  40  + 0] = numbers[number][3];
+ *&matrix[1022 + 1 *  40  + 1] = numbers[number][4];
+ *&matrix[1022 + 1 *  40  + 2] = numbers[number][5];
+ *&matrix[1022 + 2 *  40  + 0] = numbers[number][6];
+ *&matrix[1022 + 2 *  40  + 1] = numbers[number][7];
+ *&matrix[1022 + 2 *  40  + 2] = numbers[number][8];
+ *&matrix[1022 + 3 *  40  + 0] = numbers[number][9];
+ *&matrix[1022 + 3 *  40  + 1] = numbers[number][10];
+ *&matrix[1022 + 3 *  40  + 2] = numbers[number][11];
+ *&matrix[1022 + 4 *  40  + 0] = numbers[number][12];
+ *&matrix[1022 + 4 *  40  + 1] = numbers[number][13];
+ *&matrix[1022 + 4 *  40  + 2] = numbers[number][14];
+     asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   
+
+
+
+  LATD  = 0;       asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} ;
+}
+
+void NullDraw2() {
+
+     asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+
+
+ number = snake.apple_qtd >> 8;
+ *&matrix[1018 + 0 *  40  + 0] = numbers[number][0];
+ *&matrix[1018 + 0 *  40  + 1] = numbers[number][1];
+ *&matrix[1018 + 0 *  40  + 2] = numbers[number][2];
+ *&matrix[1018 + 1 *  40  + 0] = numbers[number][3];
+ *&matrix[1018 + 1 *  40  + 1] = numbers[number][4];
+ *&matrix[1018 + 1 *  40  + 2] = numbers[number][5];
+ *&matrix[1018 + 2 *  40  + 0] = numbers[number][6];
+ *&matrix[1018 + 2 *  40  + 1] = numbers[number][7];
+ *&matrix[1018 + 2 *  40  + 2] = numbers[number][8];
+ *&matrix[1018 + 3 *  40  + 0] = numbers[number][9];
+ *&matrix[1018 + 3 *  40  + 1] = numbers[number][10];
+ *&matrix[1018 + 3 *  40  + 2] = numbers[number][11];
+ *&matrix[1018 + 4 *  40  + 0] = numbers[number][12];
+ *&matrix[1018 + 4 *  40  + 1] = numbers[number][13];
+ *&matrix[1018 + 4 *  40  + 2] = numbers[number][14];
+     asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;} 
+
+
+
+  LATD  = 0;       asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} ;
+}
+
+void NullDraw3() {
+
+     asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+
+
+ start = start | PORTB;
+   asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+
+
+  LATD  = 0;       asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} ;
+}
+
 void snakeInit() {
  copy(matrix_default, matrix,  30  *  40 );
 
@@ -195,12 +412,17 @@ void snakeInit() {
  snake.fdir = 0b1001;
  snake.fdirx = 0;
  snake.fdiry = -1;
+
+ start = 0;
 }
 
 void SNAKE_NullDraw_less_2_final_cycle() {
 
      asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
 
+
+
+ if (start != 0) {
 
  if (current_vertical_line >= update_frame) {
 
@@ -289,16 +511,22 @@ void SNAKE_NullDraw_less_2_final_cycle() {
      asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
  } else {
  if (*snake.apple_pos != 5) {
- int index = rand() %  ( 30  * 40 ) ;
+ int index = rand() % ( ( 30  * 40 )  - 200);
  while (matrix[index] != 0)
  {
- index = rand() %  ( 30  * 40 ) ;
+ index = rand() % ( ( 30  * 40 )  - 200);
  }
  snake.apple_pos = &matrix[index];
  *snake.apple_pos = 5;
  snake.apple_qtd++;
  }
    asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   
+ }
+
+ } else {
+
+   asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;} asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}   asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;}  asm {nop;} 
+
  }
 
 
@@ -314,10 +542,10 @@ int main()
  while(1) {
 
   LATFbits.LATF1  = 0 ;
-  LATFbits.LATF0  = 0 ; HSync_nops(); LATFbits.LATF0  = 1 ;  NullDraw();
-  LATFbits.LATF0  = 0 ; HSync_nops(); LATFbits.LATF0  = 1 ;  NullDraw();
-  LATFbits.LATF0  = 0 ; HSync_nops(); LATFbits.LATF0  = 1 ;  NullDraw();
-  LATFbits.LATF0  = 0 ; HSync_nops(); LATFbits.LATF0  = 1 ;  NullDraw();
+  LATFbits.LATF0  = 0 ; HSync_nops(); LATFbits.LATF0  = 1 ;  NullDraw0();
+  LATFbits.LATF0  = 0 ; HSync_nops(); LATFbits.LATF0  = 1 ;  NullDraw1();
+  LATFbits.LATF0  = 0 ; HSync_nops(); LATFbits.LATF0  = 1 ;  NullDraw2();
+  LATFbits.LATF0  = 0 ; HSync_nops(); LATFbits.LATF0  = 1 ;  NullDraw3();
   LATFbits.LATF1  = 1 ;
 
 
