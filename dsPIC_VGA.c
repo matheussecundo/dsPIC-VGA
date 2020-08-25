@@ -330,6 +330,7 @@ void SNAKE_NullDraw_less_2_final_cycle() {
 			if ((*snake.ipos & 0x7) == 1) {
 
 				snakeInit();
+				return;
 
 			}
 			////////////////////////////////////
@@ -338,11 +339,12 @@ void SNAKE_NullDraw_less_2_final_cycle() {
 			if (*snake.ipos == 7) {
 
 				snakeInit();
+				return;
 
 			}
 			////////////////////////////////////
 
-			// 24 cycles ///////////////////////
+			// 18 cycles ///////////////////////
 			if (*snake.ipos == 0) {
 
 				*snake.fpos = 0;
@@ -362,7 +364,7 @@ void SNAKE_NullDraw_less_2_final_cycle() {
 			*snake.ipos = (snake.idir << 4) | 1;
 			////////////////////////////////////
 
-			REP(0, 4, 5, NOP)
+			REP(0, 4, 0, NOP)
 		} else {
 			if (*snake.apple_pos != 5) {
 				int index = rand() % (MATRIX_SIZE - 200);
@@ -374,7 +376,7 @@ void SNAKE_NullDraw_less_2_final_cycle() {
 				*snake.apple_pos = 5;
 				snake.apple_qtd++;
 			}
-			REP(1, 5, 0, NOP)
+			REP(1, 4, 5, NOP)
 		}
 
 	} else {
